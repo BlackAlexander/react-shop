@@ -33,11 +33,13 @@ function Product({ itemId, itemCategory, itemImage, itemTitle, itemPrice }){
 }
 
 function returnItems(){
+    /** @namespace currentItem.thumbnail **/
+    /** @namespace currentItem.price **/
+    /** @namespace items.products **/
     const [items, setItems] = useState([]);
     const list = [];
     useEffect(() => {
         const url = "https://dummyjson.com/products?limit=16";
-
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -45,11 +47,16 @@ function returnItems(){
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+                return [];
             });
     }, []);
+    if(items.length === 0){
+        return [];
+    }
     for (let i = 0; i < items.products.length; i++){
         const currentItem = items.products[i];
         list.push(Product({
+            key: "display-item"+String(currentItem.id),
             itemId: currentItem.id,
             itemCategory: currentItem.category,
             itemImage: currentItem.thumbnail,
@@ -67,6 +74,31 @@ function ProductsDisplay({itemsList}){
         <>
             <div className="products-display" id="list-of-products">
                 {itemsList}
+            </div>
+        </>
+    )
+}
+
+function Preview(){
+    return (
+        <>
+            <div id="background-cover" onClick="closePreview()" onMouseOver="hideSmallCart()"></div>
+            <div id="product-preview" onMouseOver="hideSmallCart()">
+                <img className="preview-image" alt="Product Preview" src="https://picsum.photos/300/400" />
+                    <div className="preview-title">##TITLE##</div>
+                    <div className="preview-description">##DESCRIPTION##</div>
+                    <div className="preview-price">##PRICE##</div>
+                    <div className="preview-add-to-cart" onClick="addToCartExtern(this)" id="previewbtn">🛒 ADD</div>
+                    <div className="preview-rating">
+                        <span className="star fa fa-star" id="star-1"></span>
+                        <span className="star fa fa-star" id="star-2"></span>
+                        <span className="star fa fa-star" id="star-3"></span>
+                        <span className="star fa fa-star" id="star-4"></span>
+                        <span className="star fa fa-star" id="star-5"></span>
+                    </div>
+                    <div className="preview-exit" onClick="closePreview()">X</div>
+                    <div className="preview-left-pic" onClick="leftPic()">&lt;</div>
+                    <div className="preview-right-pic" onClick="rightPic()">&gt;</div>
             </div>
         </>
     )
