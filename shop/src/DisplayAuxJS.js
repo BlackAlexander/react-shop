@@ -36,6 +36,12 @@ export function getURL(){
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
     let skip = (currentPage-1)*itemsPerPage;
     let finalURL = "https://dummyjson.com/products";
+    const categorySelector = document.querySelector(".category-options");
+    const category = document.querySelector(".category-options")[categorySelector.selectedIndex].text;
+    if(category !== "all"){
+        finalURL += "/category/";
+        finalURL += category;
+    }
     finalURL += "?limit=" + String(itemsPerPage);
     finalURL += "&skip=" + String(skip);
     return finalURL;
@@ -71,6 +77,7 @@ export function returnInitialItems(fetchUrl){
     if(items.length === 0){
         return [];
     }
+    document.howmany = items.products.length;
     for (let i = 0; i < items.products.length; i++){
         const currentItem = items.products[i];
         list.push(Product({
