@@ -32,6 +32,38 @@ function Product({ itemId, itemCategory, itemImage, itemTitle, itemPrice }){
         </div>
 }
 
+function PaginationBar({}){
+    const totalItems = 100;
+    let itemsPerPage = 6;
+    let totalPages = Math.ceil(totalItems/itemsPerPage);
+    console.log(totalPages);
+    return <div className="pagination-bar">
+        <div className="pagination-btn-back">&lt;</div>
+        <div className="pagination-current">1</div>
+        <div className="pagination-total">/17</div>
+        <div className="pagination-btn-next">&gt;</div>
+        <select className="pagination-per-page">
+            <option value="6">6</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+        </select>
+        <div className="pagination-final">per page</div>
+    </div>
+}
+
+function Footer(){
+    return (
+        <>
+            <footer className="giga-footer">
+                <div className="giga-name">
+                    Copyright © 2023 All rights reserved. Alexandru Negru.
+                </div>
+            </footer>
+        </>
+    )
+}
+
 function returnItems(){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
@@ -111,6 +143,8 @@ export default function Display() {
         <>
           <Header />
           <ProductsDisplay itemsList={itemsList}/>
+          <PaginationBar />
+          <Footer />
         </>
     )
 }

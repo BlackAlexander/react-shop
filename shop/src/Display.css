@@ -483,6 +483,81 @@ body {
     visibility: hidden;
 }
 
+.pagination-bar {
+    /*background-color: #ff8800;*/
+    width: 50%;
+    height: 4vh;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 500px;
+}
+
+.pagination-btn-back, .pagination-btn-next{
+    background-color: rgba(225, 225, 225, 0.7);
+    border-radius: 5px;
+    height: 80%;
+    width: 5%;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.pagination-btn-back:hover, .pagination-btn-next:hover{
+    cursor: pointer;
+    background-color: rgba(171, 171, 171, 0.7);
+}
+
+.pagination-current{
+    /*background-color: rgba(225, 225, 225, 0.2);*/
+    border: 0.1rem solid;
+    color: white;
+    border-radius: 5px;
+    height: 80%;
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin-left: 1%;
+}
+
+.pagination-total{
+    color: white;
+    border-radius: 5px;
+    height: 80%;
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin-left: 1px;
+    margin-right: 1%;
+}
+
+.pagination-per-page{
+    margin-left: 5%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 5px;
+    width: 10%;
+    height: 60%;
+}
+
+.pagination-per-page>option{
+    background-color: #1f1f1f;
+}
+
+.pagination-final{
+    user-select: none;
+    color: white;
+    margin-left: 1%;
+}
+
 .giga-footer{
     /*visibility: hidden;*/
     /*position: fixed;*/
@@ -493,7 +568,7 @@ body {
     font-size: 0.9rem;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     width: 90%;
     border-radius: 20px;
