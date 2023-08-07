@@ -1,6 +1,9 @@
 import './Display.css'
 import logo from './images/simple-logo-no-bg.png'
 import {useEffect, useState} from "react";
+import {createContext, useContext} from 'react';
+
+const ItemsContext = createContext();
 
 function Header(){
   return (
@@ -32,16 +35,41 @@ function Product({ itemId, itemCategory, itemImage, itemTitle, itemPrice }){
         </div>
 }
 
+function goBackPage(){
+    console.log("back");
+    const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
+    if (currentPage === 1){
+        return;
+    }
+    document.querySelector(".pagination-current").innerHTML = String(currentPage - 1);
+}
+
+function goNextPage(){
+    console.log("front");
+    const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
+    const itemsSelector = document.querySelector(".pagination-per-page");
+    const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
+    const totalItems = 100;
+    let totalPages = Math.ceil(totalItems/itemsPerPage);
+    if (currentPage === totalPages){
+        return;
+    }
+    document.querySelector(".pagination-current").innerHTML = String(currentPage + 1);
+}
+
+function updateItems(page, itemsPerPage){
+
+}
+
 function PaginationBar({}){
     const totalItems = 100;
     let itemsPerPage = 6;
     let totalPages = Math.ceil(totalItems/itemsPerPage);
-    console.log(totalPages);
     return <div className="pagination-bar">
-        <div className="pagination-btn-back">&lt;</div>
+        <div className="pagination-btn-back" onClick={goBackPage}>&lt;</div>
         <div className="pagination-current">1</div>
         <div className="pagination-total">/17</div>
-        <div className="pagination-btn-next">&gt;</div>
+        <div className="pagination-btn-next" onClick={goNextPage}>&gt;</div>
         <select className="pagination-per-page">
             <option value="6">6</option>
             <option value="10">10</option>
@@ -64,14 +92,14 @@ function Footer(){
     )
 }
 
-function returnItems(){
+function returnInitialItems(){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
     const [items, setItems] = useState([]);
     const list = [];
     useEffect(() => {
-        const url = "https://dummyjson.com/products?limit=16";
+        const url = "https://dummyjson.com/products?limit=6";
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -138,7 +166,7 @@ function Preview(){
 
 export default function Display() {
     console.clear();
-    let itemsList = returnItems();
+    let itemsList = returnInitialItems();
     return (
         <>
           <Header />

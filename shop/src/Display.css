@@ -499,7 +499,7 @@ body {
     background-color: rgba(225, 225, 225, 0.7);
     border-radius: 5px;
     height: 80%;
-    width: 5%;
+    width: 25px;
     display: flex;
     font-weight: bold;
     align-items: center;
@@ -518,25 +518,25 @@ body {
     color: white;
     border-radius: 5px;
     height: 80%;
-    width: 5%;
+    width: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    margin-left: 1%;
+    margin-left: 5px;
 }
 
 .pagination-total{
     color: white;
     border-radius: 5px;
     height: 80%;
-    width: 5%;
+    width: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    margin-left: 1px;
-    margin-right: 1%;
+    margin-left: 3px;
+    margin-right: 5px;
 }
 
 .pagination-per-page{
@@ -544,7 +544,7 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
     border-radius: 5px;
-    width: 10%;
+    width: 45px;
     height: 60%;
 }
 
@@ -555,7 +555,7 @@ body {
 .pagination-final{
     user-select: none;
     color: white;
-    margin-left: 1%;
+    margin-left: 3px;
 }
 
 .giga-footer{
