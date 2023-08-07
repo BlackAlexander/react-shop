@@ -38,7 +38,6 @@ function goBackPage(){
         return;
     }
     document.querySelector(".pagination-current").innerHTML = String(currentPage - 1);
-    updateItems(0, 0);
 }
 
 function goNextPage(){
@@ -51,23 +50,25 @@ function goNextPage(){
         return;
     }
     document.querySelector(".pagination-current").innerHTML = String(currentPage + 1);
-    updateItems(0, 0);
 }
 
-function updateItems(){
-    console.log("hi");
-}
+function PaginationBar( {updateurl} ){
+    // const totalItems = 100;
+    // let itemsPerPage = 6;
+    // let totalPages = Math.ceil(totalItems/itemsPerPage);
 
-function PaginationBar({}){
-    const totalItems = 100;
-    let itemsPerPage = 6;
-    let totalPages = Math.ceil(totalItems/itemsPerPage);
-    return <div className="pagination-bar">
+    const handlePageChange = () => {
+        const newContent = getURL();
+        updateurl(newContent);
+    };
+
+
+    return <div className="pagination-bar" onClick={() => handlePageChange()}>
         <div className="pagination-btn-back" onClick={goBackPage}>&lt;</div>
         <div className="pagination-current">3</div>
         <div className="pagination-total">/17</div>
         <div className="pagination-btn-next" onClick={goNextPage}>&gt;</div>
-        <select className="pagination-per-page" onChange={updateItems}>
+        <select className="pagination-per-page">
             <option value="6">6</option>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -92,7 +93,6 @@ function Footer(){
 function getURL(){
     const itemsSelector = document.querySelector(".pagination-per-page");
     if (itemsSelector === null){
-        console.log("loading");
         return "https://dummyjson.com/products?limit=6";
     }
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
@@ -104,7 +104,7 @@ function getURL(){
     return finalURL;
 }
 
-function returnInitialItems(){
+function returnInitialItems(fetchUrl){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
@@ -112,8 +112,7 @@ function returnInitialItems(){
     const list = [];
 
     useEffect(() => {
-        const url = getURL();
-        console.log(url);
+        const url = fetchUrl;
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -143,8 +142,11 @@ function returnInitialItems(){
 
 // <div className="products-display" id="list-of-products" onMouseOver="hideSmallCart()">
 
-function ProductsDisplay(){
-    const itemsList = returnInitialItems();
+function ProductsDisplay({fetchUrl}){
+    if (String(fetchUrl.slice(0,4)) !== "http"){
+        return (<> </>)
+    }
+    const itemsList = returnInitialItems(fetchUrl);
     return(
         <>
             <div className="products-display" id="list-of-products">
@@ -156,13 +158,25 @@ function ProductsDisplay(){
 
 
 export default function Display() {
-    console.clear();
+    // console.clear();
+    const [url, setUrl] = useState("");
+    const [key, setKey] = useState(0);
+
+    useEffect(()=>{
+        setUrl(getURL());
+    }, [])
+
+    const updateurl = (newurl) => {
+        console.log(newurl);
+        setUrl(newurl);
+        setKey(key + 1);
+    }
 
     return (
         <>
           <Header />
-          <ProductsDisplay />
-          <PaginationBar />
+          <ProductsDisplay fetchUrl={url} key={key}/>
+          <PaginationBar updateurl={updateurl}/>
           <Footer />
         </>
     )
