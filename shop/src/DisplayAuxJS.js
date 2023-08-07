@@ -6,6 +6,15 @@ export function goBackPage(){
     if (currentPage === 1){
         return;
     }
+
+    const categorySelector = document.querySelector(".category-options");
+    const category = document.querySelector(".category-options")[categorySelector.selectedIndex].text;
+    if(category !== "all"){
+        document.querySelector(".pagination-current").innerHTML = String(1);
+        document.querySelector(".pagination-total").innerHTML = "/" + String(1);
+        return;
+    }
+
     const itemsSelector = document.querySelector(".pagination-per-page");
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
     const totalItems = 100;
@@ -21,6 +30,14 @@ export function goNextPage(){
     const totalItems = 100;
     let totalPages = Math.ceil(totalItems/itemsPerPage);
     if (currentPage === totalPages){
+        return;
+    }
+
+    const categorySelector = document.querySelector(".category-options");
+    const category = document.querySelector(".category-options")[categorySelector.selectedIndex].text;
+    if(category !== "all"){
+        document.querySelector(".pagination-current").innerHTML = String(1);
+        document.querySelector(".pagination-total").innerHTML = "/" + String(1);
         return;
     }
     document.querySelector(".pagination-current").innerHTML = String(currentPage + 1);
@@ -41,6 +58,15 @@ export function getURL(){
     if(category !== "all"){
         finalURL += "/category/";
         finalURL += category;
+        document.querySelector(".pagination-current").innerHTML = String(1);
+        document.querySelector(".pagination-total").innerHTML = "/" + String(1);
+    } else {
+        const itemsSelector = document.querySelector(".pagination-per-page");
+        const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
+        const totalItems = 100;
+        let totalPages = Math.ceil(totalItems/itemsPerPage);
+        document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
+
     }
     finalURL += "?limit=" + String(itemsPerPage);
     finalURL += "&skip=" + String(skip);
@@ -77,7 +103,6 @@ export function returnInitialItems(fetchUrl){
     if(items.length === 0){
         return [];
     }
-    document.howmany = items.products.length;
     for (let i = 0; i < items.products.length; i++){
         const currentItem = items.products[i];
         list.push(Product({

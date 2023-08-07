@@ -33,6 +33,7 @@ function Categories(){
 
 export default function CategoryBar( {updateurl} ){
     const handlePageChange = () => {
+        document.querySelector(".pagination-current").innerHTML = String(1);
         const newContent = getURL();
         updateurl(newContent);
     };
