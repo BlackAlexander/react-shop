@@ -1,9 +1,6 @@
 import './Display.css'
 import logo from './images/simple-logo-no-bg.png'
 import {useEffect, useState} from "react";
-import {createContext, useContext} from 'react';
-
-const ItemsContext = createContext();
 
 function Header(){
   return (
@@ -36,16 +33,15 @@ function Product({ itemId, itemCategory, itemImage, itemTitle, itemPrice }){
 }
 
 function goBackPage(){
-    console.log("back");
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
     if (currentPage === 1){
         return;
     }
     document.querySelector(".pagination-current").innerHTML = String(currentPage - 1);
+    updateItems(0, 0);
 }
 
 function goNextPage(){
-    console.log("front");
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
     const itemsSelector = document.querySelector(".pagination-per-page");
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
@@ -55,10 +51,11 @@ function goNextPage(){
         return;
     }
     document.querySelector(".pagination-current").innerHTML = String(currentPage + 1);
+    updateItems(0, 0);
 }
 
-function updateItems(page, itemsPerPage){
-
+function updateItems(){
+    console.log("hi");
 }
 
 function PaginationBar({}){
@@ -67,10 +64,10 @@ function PaginationBar({}){
     let totalPages = Math.ceil(totalItems/itemsPerPage);
     return <div className="pagination-bar">
         <div className="pagination-btn-back" onClick={goBackPage}>&lt;</div>
-        <div className="pagination-current">1</div>
+        <div className="pagination-current">3</div>
         <div className="pagination-total">/17</div>
         <div className="pagination-btn-next" onClick={goNextPage}>&gt;</div>
-        <select className="pagination-per-page">
+        <select className="pagination-per-page" onChange={updateItems}>
             <option value="6">6</option>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -92,14 +89,31 @@ function Footer(){
     )
 }
 
+function getURL(){
+    const itemsSelector = document.querySelector(".pagination-per-page");
+    if (itemsSelector === null){
+        console.log("loading");
+        return "https://dummyjson.com/products?limit=6";
+    }
+    const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
+    const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
+    let skip = (currentPage-1)*itemsPerPage;
+    let finalURL = "https://dummyjson.com/products";
+    finalURL += "?limit=" + String(itemsPerPage);
+    finalURL += "&skip=" + String(skip);
+    return finalURL;
+}
+
 function returnInitialItems(){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
     const [items, setItems] = useState([]);
     const list = [];
+
     useEffect(() => {
-        const url = "https://dummyjson.com/products?limit=6";
+        const url = getURL();
+        console.log(url);
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -129,7 +143,8 @@ function returnInitialItems(){
 
 // <div className="products-display" id="list-of-products" onMouseOver="hideSmallCart()">
 
-function ProductsDisplay({itemsList}){
+function ProductsDisplay(){
+    const itemsList = returnInitialItems();
     return(
         <>
             <div className="products-display" id="list-of-products">
@@ -139,38 +154,14 @@ function ProductsDisplay({itemsList}){
     )
 }
 
-function Preview(){
-    return (
-        <>
-            <div id="background-cover" onClick="closePreview()" onMouseOver="hideSmallCart()"></div>
-            <div id="product-preview" onMouseOver="hideSmallCart()">
-                <img className="preview-image" alt="Product Preview" src="https://picsum.photos/300/400" />
-                    <div className="preview-title">##TITLE##</div>
-                    <div className="preview-description">##DESCRIPTION##</div>
-                    <div className="preview-price">##PRICE##</div>
-                    <div className="preview-add-to-cart" onClick="addToCartExtern(this)" id="previewbtn">🛒 ADD</div>
-                    <div className="preview-rating">
-                        <span className="star fa fa-star" id="star-1"></span>
-                        <span className="star fa fa-star" id="star-2"></span>
-                        <span className="star fa fa-star" id="star-3"></span>
-                        <span className="star fa fa-star" id="star-4"></span>
-                        <span className="star fa fa-star" id="star-5"></span>
-                    </div>
-                    <div className="preview-exit" onClick="closePreview()">X</div>
-                    <div className="preview-left-pic" onClick="leftPic()">&lt;</div>
-                    <div className="preview-right-pic" onClick="rightPic()">&gt;</div>
-            </div>
-        </>
-    )
-}
 
 export default function Display() {
     console.clear();
-    let itemsList = returnInitialItems();
+
     return (
         <>
           <Header />
-          <ProductsDisplay itemsList={itemsList}/>
+          <ProductsDisplay />
           <PaginationBar />
           <Footer />
         </>
