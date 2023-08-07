@@ -37,7 +37,12 @@ function goBackPage(){
     if (currentPage === 1){
         return;
     }
+    const itemsSelector = document.querySelector(".pagination-per-page");
+    const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
+    const totalItems = 100;
+    let totalPages = Math.ceil(totalItems/itemsPerPage);
     document.querySelector(".pagination-current").innerHTML = String(currentPage - 1);
+    document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
 }
 
 function goNextPage(){
@@ -50,6 +55,16 @@ function goNextPage(){
         return;
     }
     document.querySelector(".pagination-current").innerHTML = String(currentPage + 1);
+    document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
+}
+
+function updatePages(){
+    const itemsSelector = document.querySelector(".pagination-per-page");
+    const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
+    const totalItems = 100;
+    let totalPages = Math.ceil(totalItems/itemsPerPage);
+    document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
+    document.querySelector(".pagination-current").innerHTML = String(1);
 }
 
 function PaginationBar( {updateurl} ){
@@ -63,12 +78,12 @@ function PaginationBar( {updateurl} ){
     };
 
 
-    return <div className="pagination-bar" onClick={() => handlePageChange()}>
-        <div className="pagination-btn-back" onClick={goBackPage}>&lt;</div>
-        <div className="pagination-current">3</div>
+    return <div className="pagination-bar">
+        <div className="pagination-btn-back" onClick={() => {goBackPage(); handlePageChange();}}>&lt;</div>
+        <div className="pagination-current">1</div>
         <div className="pagination-total">/17</div>
-        <div className="pagination-btn-next" onClick={goNextPage}>&gt;</div>
-        <select className="pagination-per-page">
+        <div className="pagination-btn-next" onClick={() => {goNextPage(); handlePageChange();}}>&gt;</div>
+        <select className="pagination-per-page" onChange={() => {updatePages();handlePageChange();}}>
             <option value="6">6</option>
             <option value="10">10</option>
             <option value="25">25</option>
