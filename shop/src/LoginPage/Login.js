@@ -1,4 +1,5 @@
 import './Login.css'
+import {Link} from "react-router-dom";
 
 export default function Login() {
     return (
@@ -19,7 +20,9 @@ export default function Login() {
                     <input type="password"  className="login-password-input"/>
                 </div>
                 <div className="login-enter">
+                    <Link to="/shop" style={{ textDecoration: 'none', color: 'white' }}>
                     enter
+                    </Link>
                 </div>
             </div>
         </>

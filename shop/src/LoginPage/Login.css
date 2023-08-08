@@ -8,11 +8,12 @@
     /*box-shadow: 0 1px 5px rgb(255, 255, 255);*/
     top: calc(50% - 160px);
     animation-name: login-expand;
-    animation-duration: 1s;
+    animation-duration: 2s;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+    overflow: hidden;
 }
 
 @font-face{
@@ -22,7 +23,7 @@
 
 @keyframes login-expand{
     from{height: 40px;}
-    to{height: 70vh;}
+    to{height: 320px;}
 }
 
 .login-title{
@@ -68,7 +69,6 @@
     height: 7%;
     text-align: center;
     margin-top: 10%;
-    font-weight: bold;
     user-select: none;
     background-color: black;
     color: white;
