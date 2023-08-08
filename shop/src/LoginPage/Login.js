@@ -1,7 +1,21 @@
 import './Login.css'
 import {Link} from "react-router-dom";
+import { useAuth } from "./auth.js"
 
 export default function Login() {
+    const auth = useAuth();
+    // let l_username = document.querySelector(".login-email-input").value;
+    // let l_email = document.querySelector(".login-password-input").value;
+    // console.log(l_username);
+    // console.log(l_email);
+
+    const irinaLogIn = async () => {
+        const userData = {
+            token: "hehehe"
+        };
+
+        await auth.login(userData);
+    };
     return (
         <>
             <div className="home-background"></div>
@@ -19,7 +33,8 @@ export default function Login() {
                     </div>
                     <input type="password"  className="login-password-input"/>
                 </div>
-                <div className="login-enter">
+                <div className="login-enter" onClick={irinaLogIn}>
+                {/*<div className="login-enter ">*/}
                     <Link to="/shop" style={{ textDecoration: 'none', color: 'white' }}>
                     enter
                     </Link>
