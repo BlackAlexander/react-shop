@@ -7,7 +7,7 @@ export default function Home() {
             <div className="home-background"></div>
             <div className="home-welcom">
                 <div className="home-hello">hello.</div>
-                <Link to="/login" style={{ textDecoration: 'none' }}>
+                <Link to="/login" style={{ textDecoration: 'none' , color: 'black' }}>
                     <div className="home-enter"> </div>
                 </Link>
             </div>

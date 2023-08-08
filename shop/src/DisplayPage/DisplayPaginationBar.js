@@ -1,4 +1,5 @@
 import {getURL, goBackPage, goNextPage, updatePages} from "./DisplayAuxJS";
+import {Link} from "react-router-dom";
 
 export default function PaginationBar( {updateurl} ){
     const handlePageChange = () => {
@@ -22,7 +23,7 @@ export default function PaginationBar( {updateurl} ){
                 </select>
                 <div className="pagination-final">per page</div>
             </div>
-            <div className="hide-pagination">🏠</div>
+            <Link to="/" className="hide-pagination">🏠</Link>
         </>
     )
 }
