@@ -653,6 +653,27 @@ body {
     margin-left: 3px;
 }
 
+.hide-pagination{
+    /*visibility: hidden;*/
+    /*background-color: rgb(208, 208, 208);*/
+    background-image: url("../images/dark-texture.jpg");
+    height: 4vh;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 4vh;
+    border-radius: 20px;
+    min-width: 500px;
+    user-select: none;
+}
+.hide-pagination:hover{
+    background-color: rgb(169, 169, 169);
+    background-image: none;
+    cursor: pointer;
+}
+
 .giga-footer{
     /*visibility: hidden;*/
     /*position: fixed;*/
@@ -663,7 +684,7 @@ body {
     font-size: 0.9rem;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: -20px;
     display: flex;
     width: 90%;
     border-radius: 20px;

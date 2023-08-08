@@ -42,7 +42,7 @@ export default function CategoryBar( {updateurl} ){
     return <div className="category-bar">
         <div className="category-title">Category:</div>
         <select className="category-options">
-            <Category key="category--1" title="all"/>
+            <Category key="category--1" title="all" value="all"/>
             <Categories />
         </select>
         <div className="category-search" onClick={() => {handlePageChange();}}>Apply</div>

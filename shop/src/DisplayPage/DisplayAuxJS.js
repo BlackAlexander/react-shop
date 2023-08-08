@@ -70,6 +70,18 @@ export function getURL(){
     }
     finalURL += "?limit=" + String(itemsPerPage);
     finalURL += "&skip=" + String(skip);
+    if (document.searchON === true){
+        document.searchON = false;
+        let valueSearch = document.getElementById("search-query-bar").value;
+        console.log(valueSearch.length);
+        if (valueSearch.length === 0){
+            return finalURL;
+        }
+
+        return "https://dummyjson.com/products/search?q="+String(valueSearch);
+    } else {
+        document.getElementById("search-query-bar").value = "";
+    }
     return finalURL;
 }
 
