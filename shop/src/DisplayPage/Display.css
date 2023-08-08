@@ -3,7 +3,7 @@
 }
 
 body {
-    background-image: url("images/dark-texture.jpg");
+    background-image: url("../images/dark-texture.jpg");
     font-family: "Helvetica", sans-serif;
 }
 
@@ -17,7 +17,7 @@ body {
 
 @font-face{
     font-family: "Inter";
-    src: url("fonts/Inter-VariableFont_slnt,wght.ttf")
+    src: url("../fonts/Inter-VariableFont_slnt,wght.ttf")
 }
 
 .giga-header{
@@ -213,6 +213,60 @@ body {
 .category-search:hover{
     background-color: rgba(157, 157, 157, 0.4);
     cursor: pointer;
+}
+
+.search-bar {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    flex-direction: row;
+    height: 30px;
+    border-radius: 5px;
+    min-width: 300px;
+    top: 15vh;
+    right: 8%;
+}
+
+.search-input {
+    color: white;
+    background-color: rgba(21, 21, 21, 0.8);
+    border-radius: 5px;
+    width: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.search-search {
+    margin-left: 5px;
+    border: solid 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    user-select: none;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.search-search:hover {
+    background-color: rgba(157, 157, 157, 0.4);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 750px){
+    .search-bar{
+        position: absolute;
+        top: 20vh;
+        left: 8%;
+        justify-content: left;
+        width: 300px;
+        padding-left: 10px;
+    }
+    .products-display {
+        margin-top: 22vh;
+    }
 }
 
 #product-preview{

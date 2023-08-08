@@ -1,11 +1,12 @@
-import './Display.css'
-import Header from './DisplayHeader.js'
-import Footer from './DisplayFooter.js'
-import PaginationBar from "./DisplayPaginationBar.js";
-import ProductsDisplay from "./DisplayProductsDisplay.js";
-import CategoryBar from "./DisplayCategoryBar";
+import './DisplayPage/Display.css'
+import Header from './DisplayPage/DisplayHeader.js'
+import Footer from './DisplayPage/DisplayFooter.js'
+import PaginationBar from "./DisplayPage/DisplayPaginationBar.js";
+import ProductsDisplay from "./DisplayPage/DisplayProductsDisplay.js";
+import CategoryBar from "./DisplayPage/DisplayCategoryBar";
+import SearchBar from "./DisplayPage/DisplaySearchBar.js"
 import {useEffect, useState} from "react";
-import {getURL} from './DisplayAuxJS.js'
+import {getURL} from './DisplayPage/DisplayAuxJS.js'
 
 export default function Display() {
     // console.clear();
@@ -26,6 +27,7 @@ export default function Display() {
         <>
             <Header />
             <CategoryBar updateurl={updateurl}/>
+            <SearchBar updateurl={updateurl}/>
             <ProductsDisplay fetchUrl={url} key={key}/>
             <PaginationBar updateurl={updateurl}/>
             <Footer />

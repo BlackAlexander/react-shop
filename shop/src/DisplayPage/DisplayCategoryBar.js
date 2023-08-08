@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import {getURL} from "./DisplayAuxJS";
 
 function Category({title}){
-    return <option value={title}> {title} </option>
+    const newString = String("category-"+title);
+    return <option key={newString} value={title}> {title} </option>
 }
 
 function Categories(){
@@ -24,7 +25,7 @@ function Categories(){
     }
     for (let i = 0; i < items.length; i++){
         list.push(Category({
-            key: String(i),
+            key: String(i)+"catt",
             title: items[i]
         }))
     }
@@ -41,7 +42,7 @@ export default function CategoryBar( {updateurl} ){
     return <div className="category-bar">
         <div className="category-title">Category:</div>
         <select className="category-options">
-            <Category key="-1" title="all"/>
+            <Category key="category--1" title="all"/>
             <Categories />
         </select>
         <div className="category-search" onClick={() => {handlePageChange();}}>Apply</div>
