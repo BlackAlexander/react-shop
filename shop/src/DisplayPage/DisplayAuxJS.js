@@ -74,7 +74,6 @@ export function getURL(){
     if (document.searchON === true){
         document.searchON = false;
         let valueSearch = document.getElementById("search-query-bar").value;
-        console.log(valueSearch.length);
         if (valueSearch.length === 0){
             return finalURL;
         }

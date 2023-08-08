@@ -5,7 +5,6 @@ export default function ProductsDisplay({fetchUrl}){
         return (<> </>)
     }
     const itemsList = returnInitialItems(fetchUrl);
-    console.log(itemsList.length);
     return(
         <>
             <div className="products-display" id="list-of-products">
