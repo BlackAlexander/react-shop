@@ -55,6 +55,7 @@ export function getURL(){
     let finalURL = "https://dummyjson.com/products";
     const categorySelector = document.querySelector(".category-options");
     const category = document.querySelector(".category-options")[categorySelector.selectedIndex].text;
+    document.querySelector(".hide-pagination").style.visibility="hidden";
     if(category !== "all"){
         finalURL += "/category/";
         finalURL += category;
@@ -77,7 +78,7 @@ export function getURL(){
         if (valueSearch.length === 0){
             return finalURL;
         }
-
+        document.querySelector(".hide-pagination").style.visibility="visible";
         return "https://dummyjson.com/products/search?q="+String(valueSearch);
     } else {
         document.getElementById("search-query-bar").value = "";
