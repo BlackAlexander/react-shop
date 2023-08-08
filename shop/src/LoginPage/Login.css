@@ -1,0 +1,84 @@
+.login-holder {
+    font-family: "JMH", serif;
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 6px;
+    /*box-shadow: 0 1px 5px rgb(255, 255, 255);*/
+    top: calc(50% - 160px);
+    animation-name: login-expand;
+    animation-duration: 1s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+@font-face{
+    font-family: "JMH";
+    src: url("../fonts/JMH-Typewriter.ttf")
+}
+
+@keyframes login-expand{
+    from{height: 40px;}
+    to{height: 70vh;}
+}
+
+.login-title{
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    font-weight: bold;
+    user-select: none;
+    margin-bottom: 15px;
+}
+
+.login-email, .login-password{
+    background-color: rgba(0, 0, 0, 1);
+    width: 100%;
+    margin-top: 20px;
+}
+
+.login-email-title, .login-password-title{
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+    user-select: none;
+}
+
+.login-email-input, .login-password-input{
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 2px;
+}
+
+.login-email-input:focus, .login-password-input:focus{
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.login-enter{
+    width: 30%;
+    height: 7%;
+    text-align: center;
+    margin-top: 10%;
+    font-weight: bold;
+    user-select: none;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.login-enter:hover{
+    background-color: #282828;
+    cursor: pointer;
+}
