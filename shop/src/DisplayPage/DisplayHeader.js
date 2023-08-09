@@ -1,7 +1,7 @@
 import logo from "../images/simple-logo-no-bg.png";
 import {Link} from "react-router-dom";
 
-export default function Header(){
+export default function Header({updatesmall}){
     return (
         <>
             <header className="giga-header">

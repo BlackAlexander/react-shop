@@ -13,7 +13,7 @@ export default function Cart(){
     return (
         <>
             <CartHeader />
-            <CartDisplay updateItemsData={updateItemsData}/>
+            <CartDisplay updateItemsData={updateItemsData} cartItems={cartItems}/>
             <CartSummary />
             <CartFooter />
         </>

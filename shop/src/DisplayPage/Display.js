@@ -12,6 +12,7 @@ export default function Display() {
     // console.clear();
     const [url, setUrl] = useState("");
     const [key, setKey] = useState(0);
+    const [smallitems, setSmallitems] = useState([])
 
     useEffect(()=>{
         setUrl(getURL());
@@ -22,9 +23,13 @@ export default function Display() {
         setKey(key + 1);
     }
 
+    const updatesmall = (newsmall) => {
+        setSmallitems(newsmall);
+    }
+
     return (
         <>
-            <Header />
+            <Header updatesmall={updatesmall}/>
             <CategoryBar updateurl={updateurl}/>
             <SearchBar updateurl={updateurl}/>
             <ProductsDisplay fetchUrl={url} key={key}/>

@@ -23,8 +23,8 @@ async function sendDelete(itemID, updateItemsData){
             'Internship-Auth': getToken()
         },
     }).then(response => response.json()).then((json) => {
-        updateItemsData(processItems(json.data.products));
-        return processItems(json.data.products);
+        updateItemsData(processItems(json.data.products, updateItemsData));
+        return processItems(json.data.products, updateItemsData);
     });
 }
 
@@ -37,8 +37,8 @@ async function sendUpdate(itemID, quantity, updateItemsData){
         },
         body: JSON.stringify({ products: [{ id: itemID, quantity: quantity }] }),
     }).then(response => response.json()).then((json) => {
-        updateItemsData(processItems(json.data.products));
-        return processItems(json.data.products);
+        updateItemsData(processItems(json.data.products, updateItemsData));
+        return processItems(json.data.products, updateItemsData);
     });
 }
 
