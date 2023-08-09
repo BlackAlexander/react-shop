@@ -55,13 +55,13 @@ export default function Login() {
                     <div className="login-email-title">
                         email
                     </div>
-                    <input type="text" className="login-email-input" value="test3@mail.com"/>
+                    <input type="text" className="login-email-input" defaultValue="test3@mail.com"/>
                 </div>
                 <div className="login-password">
                     <div className="login-password-title">
                         password
                     </div>
-                    <input type="password"  className="login-password-input" value="BUA8Mwi3XePJYda6cE)kdbHt"/>
+                    <input type="password"  className="login-password-input" defaultValue="BUA8Mwi3XePJYda6cE)kdbHt"/>
                 </div>
                 <div className="login-enter" onClick={irinaLogIn}>
                 {/*<div className="login-enter ">*/}

@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import Product from "./DisplayProduct";
+import {useNavigate} from "react-router-dom";
 
 export function goBackPage(){
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);

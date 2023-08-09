@@ -9,7 +9,13 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (data) => {
         setUser(data);
-        navigate("/shop");
+        console.log(data.token);
+        if (data.token !== undefined){
+            navigate("/shop");
+        } else {
+            navigate("/");
+            alert("Can't log in.");
+        }
     };
 
     const logout = () => {
