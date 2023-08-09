@@ -10,8 +10,9 @@ export function undone(){
 export async function deleteItem(itemID, updateItemsData){
     const actualId = itemID.slice(10);
     console.log(sendDelete(actualId, updateItemsData));
+    console.log(itemID);
     const itemToDelete = document.getElementById(itemID);
-    itemToDelete.remove();
+    // itemToDelete.remove();
     computeTotal();
 }
 
