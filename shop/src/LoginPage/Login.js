@@ -1,21 +1,52 @@
 import './Login.css'
 import {Link} from "react-router-dom";
-import { useAuth } from "./auth.js"
+import {useAuth} from "./auth.js"
+import {useEffect, useState} from "react";
+
+async function loginGetToken(usermail, password) {
+    const url = 'http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/login';
+    const data = {
+        email: usermail,
+        password: password,
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
 
 export default function Login() {
+    const [response, setResponse] = useState(null);
     const auth = useAuth();
-    // let l_username = document.querySelector(".login-email-input").value;
-    // let l_email = document.querySelector(".login-password-input").value;
-    // console.log(l_username);
-    // console.log(l_email);
 
     const irinaLogIn = async () => {
-        const userData = {
-            token: "hehehe"
-        };
+        const l_email = document.querySelector(".login-email-input").value;
+        const l_password = document.querySelector(".login-password-input").value;
 
-        await auth.login(userData);
+        try {
+            const responseData = await loginGetToken(l_email, l_password);
+            console.log(responseData);
+            setResponse(responseData);
+            const userData = {
+                token: responseData.token, // Make sure to use the correct key from the response
+            };
+            await auth.login(userData);
+        } catch (error) {
+            console.error('API call failed:', error);
+        }
     };
+
     return (
         <>
             <div className="home-background"></div>
