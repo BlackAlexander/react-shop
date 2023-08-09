@@ -7,6 +7,7 @@ export default function CartDisplay({updateItemsData}){
         <h2 className="cart-title">YOUR CART</h2>
         <div className="cart-items" id="cart-items-list">
             {itemsList}
+            {itemsList.length===0 && <div className="empty-cart">Hmm...</div>}
         </div>
     </div>
 }

@@ -13,19 +13,31 @@ export async function deleteItem(itemID){
 }
 
 async function sendDelete(itemID){
-    return await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64c38597d8f95?products[]=${itemID}`, {
+    return await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Internship-Auth': getToken()
         },
     }).then(response => response.json()).then((json) => {
-        // updateItemsData();
         return json;
     });
 }
 
-export function increaseQuantity(itemID){
+async function sendUpdate(itemID, quantity){
+    return await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Internship-Auth': getToken()
+        },
+        body: JSON.stringify({ products: [{ id: itemID, quantity: quantity }] }),
+    }).then(response => response.json()).then((json) => {
+        return json;
+    });
+}
+
+export async function increaseQuantity(itemID){
     const item = document.getElementById(itemID);
     let minusButton = item.getElementsByClassName("cart-product-minus")[0];
     minusButton.style.opacity = "1";
@@ -33,9 +45,12 @@ export function increaseQuantity(itemID){
     let quantityBox = item.getElementsByClassName("cart-product-quantity")[0];
     quantityBox.innerHTML = String(parseInt(quantityBox.innerHTML) + 1);
     computeTotal();
+    const actualId = itemID.slice(10);
+    const quantity = quantityBox.innerHTML;
+    console.log(sendUpdate(actualId, "1"));
 }
 
-export function decreaseQuantity(itemID){
+export async function decreaseQuantity(itemID){
     const item = document.getElementById(itemID);
     let quantityBox = item.getElementsByClassName("cart-product-quantity")[0];
     if(parseInt(quantityBox.innerHTML) === 1){
@@ -48,6 +63,9 @@ export function decreaseQuantity(itemID){
     }
     quantityBox.innerHTML = String(parseInt(quantityBox.innerHTML) - 1);
     computeTotal();
+    const actualId = itemID.slice(10);
+    const quantity = quantityBox.innerHTML;
+    console.log(sendUpdate(actualId, "-1"));
 }
 
 export function updateDuplicate(itemID){
@@ -70,8 +88,9 @@ export function returnCartItems(fetchUrl, updateItemsData){
     const [items, setItems] = useState([]);
     const list = [];
     // const cartId = "64d354490459b";
-    // const cartId = 64ca3b5518e75
-    const cartId = "64c38597d8f95";
+    // const cartId = "64ca3b5518e75"; <
+    // const cartId = "64c38597d8f95";
+    const cartId = "64ca3b5518e75";
     fetchUrl += cartId;
     useEffect( () => {
         let response = fetch(fetchUrl, {
