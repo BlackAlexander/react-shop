@@ -7,8 +7,22 @@ export function undone(){
 
 }
 
-export function deleteItem(itemID){
-    console.log(itemID);
+export async function deleteItem(itemID){
+    const actualId = itemID.slice(10);
+    console.log(sendDelete(actualId));
+}
+
+async function sendDelete(itemID){
+    return await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64c38597d8f95?products[]=${itemID}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Internship-Auth': getToken()
+        },
+    }).then(response => response.json()).then((json) => {
+        // updateItemsData();
+        return json;
+    });
 }
 
 export function increaseQuantity(itemID){
@@ -56,6 +70,7 @@ export function returnCartItems(fetchUrl, updateItemsData){
     const [items, setItems] = useState([]);
     const list = [];
     // const cartId = "64d354490459b";
+    // const cartId = 64ca3b5518e75
     const cartId = "64c38597d8f95";
     fetchUrl += cartId;
     useEffect( () => {
@@ -67,11 +82,9 @@ export function returnCartItems(fetchUrl, updateItemsData){
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 setItems(data);
             })
     }, [])
-    console.log(items);
     if(items.length === 0){
         return [];
     }
