@@ -139,3 +139,24 @@ export function returnInitialItems(fetchUrl){
     }
     return list;
 }
+
+export function computeTotal(){
+    let totalMoney = 0;
+    let totalQuantity = 0;
+    let itemsListHTML = document.getElementsByClassName("cart-product");
+    let itemsList = Array.prototype.slice.call(itemsListHTML)
+    for (let i = 0; i < itemsList.length; i++){
+        let currentMoney = parseInt((itemsList[i].querySelector(".cart-product-price").innerHTML).slice(1));
+        let currentQuantity = parseInt(itemsList[i].querySelector(".cart-product-quantity").innerHTML);
+        totalMoney += currentMoney * currentQuantity;
+        totalQuantity += currentQuantity;
+    }
+    let totalItem = document.querySelector(".summary-total-value");
+    totalItem.innerHTML = "$"+String(totalMoney);
+    let priceItem = document.querySelector(".summary-price-value");
+    priceItem.innerHTML = "$"+String(totalMoney);
+    let itemsItem = document.querySelector(".summary-items-value");
+    itemsItem.innerHTML = String(itemsList.length);
+    let quantityItem = document.querySelector(".summary-quantity-value");
+    quantityItem.innerHTML = String(totalQuantity);
+}

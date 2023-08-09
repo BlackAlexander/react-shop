@@ -3,12 +3,17 @@ import CartHeader from "../CartPage/CartHeader";
 import CartDisplay from "../CartPage/CartDisplay";
 import CartSummary from "../CartPage/CartSummary";
 import CartFooter from "../CartPage/CartFooter";
+import {useState} from "react";
 
 export default function Cart(){
+    const [key, setKey] = useState(0);
+    const updateItemsData = () => {
+        setKey(key + 1);
+    }
     return (
         <>
             <CartHeader />
-            <CartDisplay />
+            <CartDisplay updateItemsData={updateItemsData} key={key}/>
             <CartSummary />
             <CartFooter />
         </>

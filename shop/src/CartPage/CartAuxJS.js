@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getToken} from "../DisplayPage/DisplayAuxJS";
+import {computeTotal, getToken} from "../DisplayPage/DisplayAuxJS";
 import CartProduct from "../CartPage/CartProduct";
 
 export function undone(){
@@ -7,19 +7,51 @@ export function undone(){
 
 }
 
-export function deleteItem(itemId){
-    console.log(itemId);
+export function deleteItem(itemID){
+    console.log(itemID);
 }
 
-export function increaseQuantity(itemId){
-    console.log(itemId);
+export function increaseQuantity(itemID){
+    const item = document.getElementById(itemID);
+    let minusButton = item.getElementsByClassName("cart-product-minus")[0];
+    minusButton.style.opacity = "1";
+    minusButton.style.cursor = "pointer";
+    let quantityBox = item.getElementsByClassName("cart-product-quantity")[0];
+    quantityBox.innerHTML = String(parseInt(quantityBox.innerHTML) + 1);
+    computeTotal();
 }
 
-export function decreaseQuantity(itemId){
-    console.log(itemId);
+export function decreaseQuantity(itemID){
+    const item = document.getElementById(itemID);
+    let quantityBox = item.getElementsByClassName("cart-product-quantity")[0];
+    if(parseInt(quantityBox.innerHTML) === 1){
+        let minusButton = item.getElementsByClassName("cart-product-minus")[0];
+        minusButton.style.opacity = "0.5";
+        minusButton.style.cursor = "default";
+    }
+    if(parseInt(quantityBox.innerHTML) === 0){
+        return;
+    }
+    quantityBox.innerHTML = String(parseInt(quantityBox.innerHTML) - 1);
+    computeTotal();
 }
 
-export function returnCartItems(fetchUrl){
+export function updateDuplicate(itemID){
+    let itemsListHTML = document.getElementsByClassName("cart-product");
+    let itemsList = Array.prototype.slice.call(itemsListHTML)
+    for (let i = 0; i < itemsList.length; i++){
+        let currentItemID = String(itemsList[i].id);
+        if (currentItemID === String(itemID)){
+            let existingItem = document.getElementById(itemID);
+            increaseQuantity(existingItem);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+export function returnCartItems(fetchUrl, updateItemsData){
     /** @namespace currentItem.quantity **/
     const [items, setItems] = useState([]);
     const list = [];
@@ -51,8 +83,10 @@ export function returnCartItems(fetchUrl){
             itemPic: currentItem.thumbnail,
             itemPrice: currentItem.price,
             itemQuantity: currentItem.quantity,
-            itemTitle: currentItem.title
+            itemTitle: currentItem.title,
+            updateItemsData: updateItemsData
         }))
     }
+    computeTotal();
     return list;
 }
