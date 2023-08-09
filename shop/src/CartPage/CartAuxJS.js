@@ -7,25 +7,26 @@ export function undone(){
 
 }
 
-export async function deleteItem(itemID){
+export async function deleteItem(itemID, updateItemsData){
     const actualId = itemID.slice(10);
-    console.log(sendDelete(actualId));
+    console.log(sendDelete(actualId, updateItemsData));
 }
 
-async function sendDelete(itemID){
-    return await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+async function sendDelete(itemID, updateItemsData){
+    await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Internship-Auth': getToken()
         },
     }).then(response => response.json()).then((json) => {
-        return json;
+        updateItemsData(processItems(json.data.products));
+        return processItems(json.data.products);
     });
 }
 
-async function sendUpdate(itemID, quantity){
-    return await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+async function sendUpdate(itemID, quantity, updateItemsData){
+    await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -33,11 +34,15 @@ async function sendUpdate(itemID, quantity){
         },
         body: JSON.stringify({ products: [{ id: itemID, quantity: quantity }] }),
     }).then(response => response.json()).then((json) => {
-        return json;
+        console.log("---");
+        console.log(processItems(json.data.products));
+        updateItemsData(processItems(json.data.products));
+        console.log("---");
+        return processItems(json.data.products);
     });
 }
 
-export async function increaseQuantity(itemID){
+export async function increaseQuantity(itemID, updateItemsData){
     const item = document.getElementById(itemID);
     let minusButton = item.getElementsByClassName("cart-product-minus")[0];
     minusButton.style.opacity = "1";
@@ -47,10 +52,10 @@ export async function increaseQuantity(itemID){
     computeTotal();
     const actualId = itemID.slice(10);
     const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "1"));
+    console.log(sendUpdate(actualId, "1", updateItemsData));
 }
 
-export async function decreaseQuantity(itemID){
+export async function decreaseQuantity(itemID, updateItemsData){
     const item = document.getElementById(itemID);
     let quantityBox = item.getElementsByClassName("cart-product-quantity")[0];
     if(parseInt(quantityBox.innerHTML) === 1){
@@ -65,7 +70,7 @@ export async function decreaseQuantity(itemID){
     computeTotal();
     const actualId = itemID.slice(10);
     const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "-1"));
+    console.log(sendUpdate(actualId, "-1"), updateItemsData);
 }
 
 export function updateDuplicate(itemID){
@@ -86,7 +91,7 @@ export function updateDuplicate(itemID){
 export function returnCartItems(fetchUrl, updateItemsData){
     /** @namespace currentItem.quantity **/
     const [items, setItems] = useState([]);
-    const list = [];
+    let list = [];
     // const cartId = "64d354490459b";
     // const cartId = "64ca3b5518e75"; <
     // const cartId = "64c38597d8f95";
@@ -107,8 +112,15 @@ export function returnCartItems(fetchUrl, updateItemsData){
     if(items.length === 0){
         return [];
     }
-    for (let i = 0; i < items.products.length; i++){
-        const currentItem = items.products[i];
+    list = processItems(items.products, updateItemsData);
+    computeTotal();
+    return list;
+}
+
+function processItems(itemslist, updateItemsData){
+    let list = [];
+    for (let i = 0; i < itemslist.length; i++){
+        const currentItem = itemslist[i];
         list.push(CartProduct({
             key: "cart-item-here"+String(currentItem.id),
             itemId: currentItem.id,
@@ -119,6 +131,5 @@ export function returnCartItems(fetchUrl, updateItemsData){
             updateItemsData: updateItemsData
         }))
     }
-    computeTotal();
     return list;
 }

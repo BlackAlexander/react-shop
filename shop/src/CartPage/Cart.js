@@ -7,7 +7,9 @@ import {useState} from "react";
 
 export default function Cart(){
     const [key, setKey] = useState(0);
-    const updateItemsData = () => {
+    const [cartItems, setCartItems] = useState([])
+    const updateItemsData = (newList) => {
+        setCartItems(newList);
         setKey(key + 1);
     }
     return (
