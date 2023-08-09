@@ -29,6 +29,7 @@ export default function Display() {
             <SearchBar updateurl={updateurl}/>
             <ProductsDisplay fetchUrl={url} key={key}/>
             <PaginationBar updateurl={updateurl}/>
+            <div id="cart-popup">item added to cart</div>
             <Footer />
         </>
     )

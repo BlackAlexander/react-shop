@@ -130,7 +130,7 @@ export function returnInitialItems(fetchUrl){
         const currentItem = items.products[i];
         list.push(Product({
             key: "display-item"+String(currentItem.id),
-            itemId: currentItem.id,
+            itemId: "item"+currentItem.id,
             itemCategory: currentItem.category,
             itemImage: currentItem.thumbnail,
             itemTitle: currentItem.title,
@@ -159,4 +159,61 @@ export function computeTotal(){
     itemsItem.innerHTML = String(itemsList.length);
     let quantityItem = document.querySelector(".summary-quantity-value");
     quantityItem.innerHTML = String(totalQuantity);
+}
+
+export async function addToCart(itemID){
+    const itemElement = document.getElementById(String(itemID));
+    const element = itemElement.getElementsByTagName("div")[3];
+    if (element.innerHTML === "🛒 Added!"){
+        return;
+    }
+    addElementToCart(itemID).then();
+    element.innerHTML = "🛒 Added!";
+    element.classList.remove("item-add-to-cart");
+    element.classList.add("item-added-to-cart");
+    let popup = document.getElementById("cart-popup");
+    popup.style.visibility = "visible";
+    popup.style.opacity = "1";
+    setTimeout(() => {
+        showCartAgain(element);
+    }, 1000);
+}
+
+function showCartAgain(element){
+    element.innerHTML = "🛒 ADD!";
+    element.classList.remove("item-added-to-cart");
+    element.classList.add("item-add-to-cart");
+    let popup = document.getElementById("cart-popup");
+    popup.style.opacity = "1";
+    let fadeEffect = setInterval(function () {
+        if (popup.style.opacity > 0.4) {
+            popup.style.opacity -= 0.2;
+        } else {
+            clearInterval(fadeEffect);
+            popup.style.visibility = "hidden";
+        }
+    }, 100);
+}
+
+
+async function addElementToCart(elementID){
+    let itemID = String(elementID).slice(4);
+
+    return await fetch('https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Internship-Auth': getToken(),
+        },
+        body: JSON.stringify({
+            userId: 1,
+            products: [
+                {
+                    id: itemID,
+                    quantity: 1,
+                },
+            ]
+        })
+    })
+        .then(res => res.json());
 }

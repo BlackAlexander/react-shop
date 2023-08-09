@@ -51,7 +51,7 @@ export async function increaseQuantity(itemID, updateItemsData){
     quantityBox.innerHTML = String(parseInt(quantityBox.innerHTML) + 1);
     computeTotal();
     const actualId = itemID.slice(10);
-    const quantity = quantityBox.innerHTML;
+    // const quantity = quantityBox.innerHTML;
     console.log(sendUpdate(actualId, "1", updateItemsData));
 }
 
@@ -69,24 +69,9 @@ export async function decreaseQuantity(itemID, updateItemsData){
     quantityBox.innerHTML = String(parseInt(quantityBox.innerHTML) - 1);
     computeTotal();
     const actualId = itemID.slice(10);
-    const quantity = quantityBox.innerHTML;
+    // const quantity = quantityBox.innerHTML;
     console.log(sendUpdate(actualId, "-1", updateItemsData));
 }
-
-export function updateDuplicate(itemID){
-    let itemsListHTML = document.getElementsByClassName("cart-product");
-    let itemsList = Array.prototype.slice.call(itemsListHTML)
-    for (let i = 0; i < itemsList.length; i++){
-        let currentItemID = String(itemsList[i].id);
-        if (currentItemID === String(itemID)){
-            let existingItem = document.getElementById(itemID);
-            increaseQuantity(existingItem);
-            return true;
-        }
-    }
-    return false;
-}
-
 
 export function returnCartItems(fetchUrl, updateItemsData){
     /** @namespace currentItem.quantity **/
