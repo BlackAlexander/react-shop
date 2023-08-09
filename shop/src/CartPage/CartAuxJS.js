@@ -12,7 +12,11 @@ export async function deleteItem(itemID, updateItemsData){
     console.log(sendDelete(actualId, updateItemsData));
     console.log(itemID);
     const itemToDelete = document.getElementById(itemID);
-    // itemToDelete.remove();
+    try {
+        itemToDelete.remove();
+    } catch {
+        // aia e
+    }
     computeTotal();
 }
 
