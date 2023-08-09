@@ -2,6 +2,7 @@ import {deleteItem, increaseQuantity, decreaseQuantity} from "../CartPage/CartAu
 
 export default function CartProduct({itemId, itemPic, itemTitle, itemQuantity, itemPrice, updateItemsData}){
     const newId = "cart-item-" + String(itemId);
+    const newPrice = "$" + String(itemPrice);
     return <div className="cart-product" id={newId} key={newId}>
         <img className="cart-product-pic" alt="Cart Product Picture" src={itemPic} />
         <div className="cart-product-title">{itemTitle}</div>
@@ -9,7 +10,7 @@ export default function CartProduct({itemId, itemPic, itemTitle, itemQuantity, i
         <div className="cart-product-minus" onClick={() => {decreaseQuantity(newId, updateItemsData).then(() => {}); }}>-</div>
         <div className="cart-product-quantity">{itemQuantity}</div>
         <div className="cart-product-plus" onClick={() => {increaseQuantity(newId, updateItemsData).then(() => {}); }}>+</div>
-        <div className="cart-product-price">{itemPrice}</div>
+        <div className="cart-product-price">{newPrice}</div>
         <div className="cart-product-heart">🖤</div>
     </div>
 }

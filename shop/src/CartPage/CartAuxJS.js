@@ -10,6 +10,9 @@ export function undone(){
 export async function deleteItem(itemID, updateItemsData){
     const actualId = itemID.slice(10);
     console.log(sendDelete(actualId, updateItemsData));
+    const itemToDelete = document.getElementById(itemID);
+    itemToDelete.remove();
+    computeTotal();
 }
 
 async function sendDelete(itemID, updateItemsData){
@@ -34,10 +37,7 @@ async function sendUpdate(itemID, quantity, updateItemsData){
         },
         body: JSON.stringify({ products: [{ id: itemID, quantity: quantity }] }),
     }).then(response => response.json()).then((json) => {
-        console.log("---");
-        console.log(processItems(json.data.products));
         updateItemsData(processItems(json.data.products));
-        console.log("---");
         return processItems(json.data.products);
     });
 }
@@ -70,7 +70,7 @@ export async function decreaseQuantity(itemID, updateItemsData){
     computeTotal();
     const actualId = itemID.slice(10);
     const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "-1"), updateItemsData);
+    console.log(sendUpdate(actualId, "-1", updateItemsData));
 }
 
 export function updateDuplicate(itemID){
