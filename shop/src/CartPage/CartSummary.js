@@ -1,3 +1,5 @@
+import {undone} from "../CartPage/CartAuxJS";
+
 export default function CartSummary(){
     return <div className="cart-summary">
         <div className="summary-total">TOTAL</div>
@@ -8,6 +10,6 @@ export default function CartSummary(){
         <div className="summary-quantity-value">##VALUE##</div>
         <div className="summary-price">PRICE</div>
         <div className="summary-price-value">##VALUE##</div>
-        <div className="summary-order" onClick="undone()">Proceed to payment</div>
+        <div className="summary-order" onClick={undone}>Proceed to payment</div>
     </div>
 }
