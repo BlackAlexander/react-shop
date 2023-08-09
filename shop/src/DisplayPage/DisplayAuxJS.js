@@ -44,7 +44,15 @@ export function goNextPage(){
     document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
 }
 
+export function getToken(){
+    const tokenObject = JSON.parse(window.localStorage.getItem('user'))
+    const tokenValue = tokenObject.token;
+    console.log(tokenValue);
+    return tokenValue;
+}
+
 export function getURL(){
+    console.log(getToken());
     const itemsSelector = document.querySelector(".pagination-per-page");
     if (itemsSelector === null){
         return "https://dummyjson.com/products?limit=6";
