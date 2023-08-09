@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Product from "./DisplayProduct";
-import {useNavigate} from "react-router-dom";
 
 export function goBackPage(){
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
@@ -47,13 +46,16 @@ export function goNextPage(){
 
 export function getToken(){
     const tokenObject = JSON.parse(window.localStorage.getItem('user'))
-    const tokenValue = tokenObject.token;
-    console.log(tokenValue);
-    return tokenValue;
+    return tokenObject.token;
+}
+
+export function decodeToken(){
+    const decodedToken = atob(getToken());
+    const breakIndex = decodedToken.indexOf("|");
+    return decodedToken.slice(0, breakIndex);
 }
 
 export function getURL(){
-    console.log(getToken());
     const itemsSelector = document.querySelector(".pagination-per-page");
     if (itemsSelector === null){
         return "https://dummyjson.com/products?limit=6";
