@@ -21,6 +21,13 @@
     border-radius: 6px;
     box-shadow: 0 1px 4px rgb(255, 255, 255);
     overflow: auto;
+    animation-name: cart-expand;
+    animation-duration: 2s;
+}
+
+@keyframes cart-expand{
+    from{height: 40px;}
+    to{height: 60%;}
 }
 
 ::-webkit-scrollbar {
@@ -168,7 +175,19 @@
     width: 20%;
     border-radius: 6px;
     box-shadow: 0 1px 4px rgb(255, 255, 255);
+    animation-name: summary-expand;
+    animation-duration: 2s;
     min-width: 300px;
+}
+
+@keyframes summary-expand{
+    from{
+        width: 2px;
+        min-width: 2px;
+        overflow: hidden;
+        left: 90%;
+    }
+    to{width:20%;}
 }
 
 .summary-total, .summary-items, .summary-quantity, .summary-price{

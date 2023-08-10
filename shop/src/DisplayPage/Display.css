@@ -310,9 +310,6 @@ body {
     .account-bar{
         position: absolute;
         left: calc(50% - 150px);
-        justify-content: left;
-        width: 120px;
-        min-width: 120px;
         padding-left: 10px;
     }
     .search-bar{
