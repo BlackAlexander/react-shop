@@ -18,7 +18,6 @@ export default function Preview(){
                         <span className="star" id="star-4">⭐</span>
                         <span className="star" id="star-5">⭐</span>
                     </div>
-                    <div className="preview-exit">X</div>
                     <div className="preview-left-pic">
                     </div>
                     <div className="preview-right-pic">></div>

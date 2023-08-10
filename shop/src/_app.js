@@ -9,33 +9,31 @@ import Preview from "./PreviewPage/Preview";
 
 export default function App(){
     return (
-        // <BrowserRouter>
-            <AuthProvider>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/shop" element={
-                        <ProtectedRoute>
-                            <Display />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/shop/:id" element={
-                        <ProtectedRoute>
-                            <Preview />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/account" element={
-                        <ProtectedRoute>
-                            <Account />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/cart" element={
-                        <ProtectedRoute>
-                            <Cart />
-                        </ProtectedRoute>
-                    } />
-                </Routes>
-            </AuthProvider>
-        // </BrowserRouter>
+        <AuthProvider>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/shop" element={
+                    <ProtectedRoute>
+                        <Display />
+                    </ProtectedRoute>
+                } />
+                <Route path="/shop/:id" element={
+                    <ProtectedRoute>
+                        <Preview />
+                    </ProtectedRoute>
+                } />
+                <Route path="/account" element={
+                    <ProtectedRoute>
+                        <Account />
+                    </ProtectedRoute>
+                } />
+                <Route path="/cart" element={
+                    <ProtectedRoute>
+                        <Cart />
+                    </ProtectedRoute>
+                } />
+            </Routes>
+        </AuthProvider>
     )
 }
