@@ -42,3 +42,31 @@
     background-color: black;
     color: white;
 }
+
+.account-logout{
+    width: 250px;
+    height: 4vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 3px;
+    position: absolute;
+    bottom: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 0 0 5px rgb(255, 255, 255)
+}
+
+.account-logout:after{
+    content:"<log out>";
+}
+
+.account-logout:hover:after{
+    content:"< log out >";
+}
+
+.account-logout:hover{
+    cursor: pointer;
+    background-color: rgba(197, 197, 197, 0.85);
+}

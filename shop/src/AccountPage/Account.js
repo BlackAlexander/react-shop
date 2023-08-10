@@ -2,12 +2,15 @@ import './Account.css'
 import {decodeToken} from "../DisplayPage/DisplayAuxJS.js";
 import {useEffect, useState} from "react";
 import CartHeader from "../CartPage/CartHeader";
+import {useAuth} from "../LoginPage/auth.js";
 
 export default function Login() {
     const [mail, setMail] = useState("johndoe@mail.com");
     useEffect(()=>{
         setMail(decodeToken());
     }, [])
+
+    const auth = useAuth();
     return (
         <>
             <CartHeader />
@@ -22,6 +25,7 @@ export default function Login() {
                 <div className="account-title">address</div>
                 <div className="account-value">Calea Turzii</div>
             </div>
+            <div className="account-logout" onClick={() => {auth.logout();}}></div>
         </>
     )
 }
