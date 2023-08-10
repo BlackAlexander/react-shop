@@ -1,7 +1,7 @@
 import './Account.css'
-import Header from "../DisplayPage/DisplayHeader";
 import {decodeToken} from "../DisplayPage/DisplayAuxJS.js";
 import {useEffect, useState} from "react";
+import CartHeader from "../CartPage/CartHeader";
 
 export default function Login() {
     const [mail, setMail] = useState("johndoe@mail.com");
@@ -10,7 +10,7 @@ export default function Login() {
     }, [])
     return (
         <>
-            <Header />
+            <CartHeader />
             <div className="account-holder">
                 <div className="account-picture"></div>
                 <div className="account-title">name</div>

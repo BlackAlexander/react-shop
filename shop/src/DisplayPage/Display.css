@@ -230,6 +230,38 @@ body {
     cursor: pointer;
 }
 
+.account-bar {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 30px;
+    min-width: 300px;
+    top: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.account-icon {
+    user-select: none;
+    padding-bottom: 2px;
+}
+
+.account-button {
+    margin-left: 5px;
+    border: solid 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    user-select: none;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.account-button:hover {
+    background-color: rgba(157, 157, 157, 0.4);
+    cursor: pointer;
+}
+
 .search-bar {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.7);
@@ -270,17 +302,29 @@ body {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 750px){
+@media only screen and (max-width: 1100px){
+    .category-bar{
+        left: calc(50% - 150px);
+        top: 20vh;
+    }
+    .account-bar{
+        position: absolute;
+        left: calc(50% - 150px);
+        justify-content: left;
+        width: 120px;
+        min-width: 120px;
+        padding-left: 10px;
+    }
     .search-bar{
         position: absolute;
-        top: 20vh;
-        left: 8%;
+        top: 25vh;
+        left: calc(50% - 150px);
         justify-content: left;
         width: 300px;
         padding-left: 10px;
     }
     .products-display {
-        margin-top: 22vh;
+        margin-top: 27vh;
     }
 }
 

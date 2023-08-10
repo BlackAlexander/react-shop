@@ -7,6 +7,7 @@ import SearchBar from "./DisplaySearchBar";
 import ProductsDisplay from "./DisplayProductsDisplay";
 import PaginationBar from "./DisplayPaginationBar";
 import Footer from "./DisplayFooter";
+import AccountBar from "./DisplayAccount.js"
 
 export default function Display() {
     // console.clear();
@@ -31,6 +32,7 @@ export default function Display() {
         <>
             <Header updatesmall={updatesmall}/>
             <CategoryBar updateurl={updateurl}/>
+            <AccountBar />
             <SearchBar updateurl={updateurl}/>
             <ProductsDisplay fetchUrl={url} key={key}/>
             <PaginationBar updateurl={updateurl}/>
