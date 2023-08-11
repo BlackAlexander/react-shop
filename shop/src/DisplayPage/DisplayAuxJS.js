@@ -105,7 +105,7 @@ export function updatePages(){
     document.querySelector(".pagination-current").innerHTML = String(1);
 }
 
-export function returnInitialItems(fetchUrl, listOfFavs, updateFavs){
+export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
@@ -135,7 +135,8 @@ export function returnInitialItems(fetchUrl, listOfFavs, updateFavs){
             itemTitle: currentItem.title,
             itemPrice: currentItem.price,
             listOfFavs: listOfFavs,
-            updateFavs: updateFavs
+            updateFavs: updateFavs,
+            navigate: navigate
         }))
     }
     return list;
@@ -218,3 +219,21 @@ async function addElementToCart(elementID){
     })
         .then(res => res.json());
 }
+
+export function hoverItemOn(theId){
+    let itemToHover = document.getElementById(theId);
+    itemToHover.style.border = "3px solid #FFFFFF";
+    itemToHover.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+    let insidePic = itemToHover.getElementsByTagName('img')[0];
+    insidePic.style.filter = "opacity(100%)";
+    insidePic.style.cursor = "pointer";
+}
+
+export function hoverItemOff(theId){
+    let itemToHover = document.getElementById(theId);
+    itemToHover.style.border = "3px solid transparent";
+    itemToHover.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+    let insidePic = itemToHover.getElementsByTagName('img')[0];
+    insidePic.style.filter = "opacity(95%)";
+}
+

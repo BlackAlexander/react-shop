@@ -1,6 +1,6 @@
-import {addToCart} from "./DisplayAuxJS.js";
+import {addToCart, hoverItemOff, hoverItemOn} from "./DisplayAuxJS.js";
 
-export default function Product({ itemId, itemCategory, itemImage, itemTitle, itemPrice, listOfFavs, updateFavs }){
+export default function Product({ itemId, itemCategory, itemImage, itemTitle, itemPrice, listOfFavs, updateFavs, navigate }){
     let isFavorite = '🖤';
 
     if (listOfFavs.includes(itemId.slice(4))){
@@ -23,7 +23,18 @@ export default function Product({ itemId, itemCategory, itemImage, itemTitle, it
     return <div className="shop-item" id={itemId} key={itemId}>
         <div className="item-category">{itemCategory}</div>
         <div className="item-heart" onClick={switchInFavs}>{isFavorite}</div>
-        <img src={itemImage} alt="" className="item-image" />
+        <img
+            src={itemImage}
+            alt="" className="item-image"
+            onMouseOver={()=>{hoverItemOn(itemId)}}
+            onMouseOut={()=>{hoverItemOff(itemId)}}
+            onClick={()=>{
+                let newAddress = "/shop";
+                newAddress += "/";
+                newAddress += String(itemId.slice(4));
+                navigate(newAddress);
+            }}
+        />
         <div className="item-title">{itemTitle}</div>
         <div className="item-price">${itemPrice}</div>
         <div className="item-add-to-cart" onClick={() => addToCart(itemId)}>🛒 ADD</div>
