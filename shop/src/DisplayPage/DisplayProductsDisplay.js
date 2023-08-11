@@ -15,7 +15,7 @@ export default function ProductsDisplay({fetchUrl}){
         <>
             <div className="products-display" id="list-of-products">
                 {itemsList}
-                {itemsList.length===0 && <div className="no-items-to-show">Hmmm.</div>}
+                {itemsList.length===0 && <div className="no-items-to-show">Hmm...</div>}
             </div>
         </>
     )
