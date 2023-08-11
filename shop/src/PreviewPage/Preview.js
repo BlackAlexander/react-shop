@@ -33,26 +33,24 @@ export default function Preview(){
 
     function leftPic(){
         for (let i = 1; i < images.length; i++){
-            console.log(images[i]);
-            if(currentImage == images[i]){
+            if(currentImage === images[i]){
                 setCurrentImage(images[i-1]);
                 return;
             }
         }
-        if (currentImage == images[0]){
+        if (currentImage === images[0]){
             setCurrentImage(images[images.length - 1]);
         }
     }
 
     function rightPic(){
         for (let i = 0; i < images.length - 1; i++){
-            console.log(images[i]);
-            if(currentImage == images[i]){
+            if(currentImage === images[i]){
                 setCurrentImage(images[i+1]);
                 return;
             }
         }
-        if (currentImage == images[images.length - 1]){
+        if (currentImage === images[images.length - 1]){
             setCurrentImage(images[0]);
         }
     }
@@ -65,7 +63,7 @@ export default function Preview(){
                     <div className="preview-title">{currentItem.title}</div>
                     <div className="preview-description">{currentItem.description}</div>
                     <div className="preview-price">${currentItem.price}</div>
-                    <div className="preview-add-to-cart" id="previewbtn">🛒 ADD</div>
+                    {/*<div className="preview-add-to-cart" id="previewbtn">🛒 ADD</div>*/}
                     <div className="preview-rating">
                         <span className="star" id="star-1">⭐</span>
                         <span className="star" id="star-2">⭐</span>
