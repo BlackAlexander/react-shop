@@ -1,8 +1,6 @@
 import {returnCartItems} from "../CartPage/CartAuxJS";
-
-export default function CartDisplay({updateItemsData}){
-    const itemsList = returnCartItems("http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/", updateItemsData);
-
+export default function CartDisplay({updateItemsData, listOfFavs, updateFavs} ){
+    const itemsList = returnCartItems("http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/", updateItemsData, listOfFavs, updateFavs);
 
     return <div className="cart-display">
         <h2 className="cart-title">YOUR CART</h2>

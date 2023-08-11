@@ -4,7 +4,8 @@ import CartDisplay from "../CartPage/CartDisplay";
 import CartSummary from "../CartPage/CartSummary";
 import CartFooter from "../CartPage/CartFooter";
 import {useState} from "react";
-import {Provider} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {selectFavs, setFavs} from "../redux/slices/favorites";
 
 export default function Cart(){
     const [cartItems, setCartItems] = useState([])
@@ -12,11 +13,16 @@ export default function Cart(){
         setCartItems(newList);
     }
 
+    const dispatch = useDispatch();
+    const listOfFavs = useSelector(selectFavs);
+    const updateFavs = (newList) => {
+        dispatch(setFavs(newList));
+    }
 
     return (
         <>
             <CartHeader />
-            <CartDisplay updateItemsData={updateItemsData}/>
+            <CartDisplay updateItemsData={updateItemsData} listOfFavs={listOfFavs} updateFavs={updateFavs}/>
             <CartSummary />
             <CartFooter />
         </>
