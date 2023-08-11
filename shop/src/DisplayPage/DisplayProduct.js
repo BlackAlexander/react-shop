@@ -6,7 +6,6 @@ export default function Product({ itemId, itemCategory, itemImage, itemTitle, it
     if (listOfFavs.includes(itemId.slice(4))){
         isFavorite = '❤️';
     }
-    console.log(listOfFavs);
 
     function switchInFavs() {
         const newId = itemId.slice(4);
@@ -21,7 +20,7 @@ export default function Product({ itemId, itemCategory, itemImage, itemTitle, it
         }
     }
 
-    return <div className="shop-item" id={itemId}>
+    return <div className="shop-item" id={itemId} key={itemId}>
         <div className="item-category">{itemCategory}</div>
         <div className="item-heart" onClick={switchInFavs}>{isFavorite}</div>
         <img src={itemImage} alt="" className="item-image" />

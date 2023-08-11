@@ -8,7 +8,6 @@ export default function CartProduct({itemId, itemPic, itemTitle, itemQuantity, i
     if (listOfFavs.includes(String(itemId))){
         isFavorite = '❤️';
     }
-    console.log(listOfFavs);
 
     function switchInFavs() {
         if (listOfFavs.includes(String(itemId))){

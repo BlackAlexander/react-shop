@@ -129,7 +129,6 @@ export function returnInitialItems(fetchUrl, listOfFavs, updateFavs){
     for (let i = 0; i < items.products.length; i++){
         const currentItem = items.products[i];
         list.push(Product({
-            key: "display-item"+String(currentItem.id),
             itemId: "item"+currentItem.id,
             itemCategory: currentItem.category,
             itemImage: currentItem.thumbnail,

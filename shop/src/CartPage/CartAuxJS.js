@@ -10,7 +10,6 @@ export function undone(){
 export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs){
     const actualId = itemID.slice(10);
     console.log(sendDelete(actualId, updateItemsData, listOfFavs, updateFavs));
-    console.log(itemID);
     const itemToDelete = document.getElementById(itemID);
     try {
         itemToDelete.remove();
@@ -112,7 +111,6 @@ function processItems(itemslist, updateItemsData, listOfFavs, updateFavs){
     for (let i = 0; i < itemslist.length; i++){
         const currentItem = itemslist[i];
         list.push(CartProduct({
-            key: "cart-item-here"+String(currentItem.id),
             itemId: currentItem.id,
             itemPic: currentItem.thumbnail,
             itemPrice: currentItem.price,
