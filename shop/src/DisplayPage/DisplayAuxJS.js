@@ -105,7 +105,7 @@ export function updatePages(){
     document.querySelector(".pagination-current").innerHTML = String(1);
 }
 
-export function returnInitialItems(fetchUrl){
+export function returnInitialItems(fetchUrl, listOfFavs, updateFavs){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
@@ -134,7 +134,9 @@ export function returnInitialItems(fetchUrl){
             itemCategory: currentItem.category,
             itemImage: currentItem.thumbnail,
             itemTitle: currentItem.title,
-            itemPrice: currentItem.price
+            itemPrice: currentItem.price,
+            listOfFavs: listOfFavs,
+            updateFavs: updateFavs
         }))
     }
     return list;

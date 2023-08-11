@@ -5,18 +5,19 @@ export default function CartProduct({itemId, itemPic, itemTitle, itemQuantity, i
     const newPrice = "$" + String(itemPrice);
 
     let isFavorite = '🖤';
-    if (listOfFavs.includes(itemId)){
+    if (listOfFavs.includes(String(itemId))){
         isFavorite = '❤️';
     }
+    console.log(listOfFavs);
 
     function switchInFavs() {
-        if (listOfFavs.includes(itemId)){
-            let newList = listOfFavs.filter(x => x !== itemId);
+        if (listOfFavs.includes(String(itemId))){
+            let newList = listOfFavs.filter(x => x !== String(itemId));
             updateFavs(newList);
 
         } else {
             let newList = structuredClone(listOfFavs);
-            newList.push(itemId);
+            newList.push(String(itemId));
             updateFavs(newList);
         }
     }
