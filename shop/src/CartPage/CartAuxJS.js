@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import {computeTotal, getToken} from "../DisplayPage/DisplayAuxJS";
 import CartProduct from "../CartPage/CartProduct";
-import {useSelector} from "react-redux";
-import {selectFavs} from "../redux/slices/favorites";
 
 export function undone(){
     alert("The developer did not work on this functionality yet. However, if you really want to order this product, contact him at (0712) 345 678.")
