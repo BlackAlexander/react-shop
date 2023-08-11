@@ -27,14 +27,14 @@ export default function Display() {
     const updatesmall = (newsmall) => {
         setSmallitems(newsmall);
     }
-
+    const shouldRenderProducts = String(url.slice(0, 4)) === "http";
     return (
         <>
             <Header updatesmall={updatesmall}/>
             <CategoryBar updateurl={updateurl}/>
             <AccountBar />
             <SearchBar updateurl={updateurl}/>
-            <ProductsDisplay fetchUrl={url} key={key}/>
+            {shouldRenderProducts && <ProductsDisplay fetchUrl={url} key={key}/>}
             <PaginationBar updateurl={updateurl}/>
             <div id="cart-popup">item added to cart</div>
             <Footer />

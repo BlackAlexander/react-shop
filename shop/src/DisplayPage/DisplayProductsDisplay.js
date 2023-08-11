@@ -3,9 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectFavs, setFavs} from "../redux/slices/favorites";
 
 export default function ProductsDisplay({fetchUrl}){
-    if (String(fetchUrl.slice(0,4)) !== "http"){
-        return (<> </>)
-    }
     const dispatch = useDispatch();
     const listOfFavs = useSelector(selectFavs);
     const updateFavs = (newList) => {
