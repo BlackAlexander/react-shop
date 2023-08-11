@@ -164,7 +164,7 @@ export function computeTotal(){
 
 export async function addToCart(itemID){
     const itemElement = document.getElementById(String(itemID));
-    const element = itemElement.getElementsByTagName("div")[3];
+    const element = itemElement.getElementsByTagName("div")[4];
     if (element.innerHTML === "🛒 Added!"){
         return;
     }

@@ -20,6 +20,10 @@ body {
     src: url("../fonts/Inter-VariableFont_slnt,wght.ttf")
 }
 
+::-webkit-scrollbar {
+    all:unset;
+}
+
 .giga-header{
     position: fixed;
     background-color: rgba(255, 255, 255, 0.90);
