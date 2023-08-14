@@ -22,6 +22,7 @@ function generate36(){
     ratingPiece.innerHTML = "1⭐";
     ratingPiece.classList.add("review-rating-piece")
     container.append(ratingPiece);
+    container.setAttribute("lastPressed", "1");
     for (let i = 0; i < 36; i++){
         const newPiece = document.createElement("div");
         newPiece.classList.add("review-circle-piece");
@@ -32,8 +33,7 @@ function generate36(){
             generateHover(i);
         })
         newPiece.addEventListener("click", function () {
-            let selectedScore = 1;
-            console.log(i);
+            let selectedScore;
             if (i === 0){
                 selectedScore = 1;
             } else if (i === 9){
@@ -48,6 +48,11 @@ function generate36(){
                 selectedScore = Math.round((i/8.75+1) * 100) / 100
             }
             ratingPiece.innerHTML = String(selectedScore) + "⭐";
+            container.setAttribute("lastPressed", String(i));
+        })
+        newPiece.addEventListener("mouseout", function(){
+            let toGo = parseInt(container.getAttribute("lastPressed"));
+            generateHover(toGo);
         })
         container.append(newPiece);
     }
@@ -57,6 +62,17 @@ export default function Review({idToReview, showreview, titleToReview}){
     useEffect(()=>{
         generate36();
     })
+
+    function sendData(){
+        console.log(idToReview);
+        const reviewTitle = document.querySelector(".review-box-title-input").value;
+        const reviewDescription = document.querySelector(".review-box-description-input").value;
+        const reviewRating = document.querySelector(".review-rating-piece").innerHTML.slice(0, -1);
+        console.log(reviewTitle);
+        console.log(reviewDescription);
+        console.log(reviewRating);
+    }
+
     return <div className="review-page">
         <div className="review-background" onClick={()=>(showreview("-1"))}>
         </div>
@@ -74,7 +90,7 @@ export default function Review({idToReview, showreview, titleToReview}){
                 <div className="review-box-rating-title">rating</div>
                 <div className="review-box-rating-input"></div>
             </div>
-            <div className="review-publish">PUSH</div>
+            <div className="review-publish" onClick={()=>{sendData();}}>PUSH</div>
         </div>
     </div>
 }
