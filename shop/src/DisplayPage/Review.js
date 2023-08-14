@@ -1,4 +1,63 @@
+import {useEffect} from "react";
+
+function generateHover(howMany){
+    for (let i = 0; i < 36; i++){
+        const idToGet = "circlePiece" + String(i);
+        const thisPiece = document.getElementById(idToGet);
+        if(i <= howMany){
+            thisPiece.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+        } else {
+            thisPiece.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+        }
+    }
+}
+
+function generate36(){
+    const container = document.querySelector(".review-box-rating-input");
+    if (container === null){
+        return;
+    }
+    container.innerHTML = "";
+    const ratingPiece = document.createElement("div");
+    ratingPiece.innerHTML = "1⭐";
+    ratingPiece.classList.add("review-rating-piece")
+    container.append(ratingPiece);
+    for (let i = 0; i < 36; i++){
+        const newPiece = document.createElement("div");
+        newPiece.classList.add("review-circle-piece");
+        newPiece.innerHTML = "";
+        newPiece.id = "circlePiece" + String(i);
+        newPiece.style.transform = "rotate(" + String(i*10)+"deg)" + " translateY(-700%) ";
+        newPiece.addEventListener("mouseover", function () {
+            generateHover(i);
+        })
+        newPiece.addEventListener("click", function () {
+            let selectedScore = 1;
+            console.log(i);
+            if (i === 0){
+                selectedScore = 1;
+            } else if (i === 9){
+                selectedScore = 2;
+            } else if (i === 18){
+                selectedScore = 3;
+            } else if (i === 27){
+                selectedScore = 4;
+            } else if (i === 35){
+                selectedScore = 5;
+            } else {
+                selectedScore = Math.round((i/8.75+1) * 100) / 100
+            }
+            console.log(selectedScore);
+            ratingPiece.innerHTML = String(selectedScore) + "⭐";
+        })
+        container.append(newPiece);
+    }
+}
+
 export default function Review({idToReview, showreview, titleToReview}){
+    useEffect(()=>{
+        generate36();
+    })
     return <div className="review-page">
         <div className="review-background" onClick={()=>(showreview("-1"))}>
         </div>
@@ -14,7 +73,7 @@ export default function Review({idToReview, showreview, titleToReview}){
             </div>
             <div className="review-box-rating">
                 <div className="review-box-rating-title">rating</div>
-                <textarea name="review-rating" spellCheck="false" placeholder="..." className="review-box-rating-input" />
+                <div className="review-box-rating-input"></div>
             </div>
         </div>
     </div>

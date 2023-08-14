@@ -688,13 +688,18 @@ body {
 }
 
 .review-box-rating{
+    position: fixed;
     height: 40vh;
     width: 35vw;
     margin-left: 42vw;
     margin-top: 4vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-.review-box-title-input, .review-box-description-input, .review-box-rating-input{
+.review-box-title-input, .review-box-description-input{
     background-color: rgba(255, 255, 255, 0.2);
     font-family: Constantia, serif;
     border: none;
@@ -721,7 +726,7 @@ body {
     overflow-y: hidden;
 }
 
-.review-box-title-input:focus, .review-box-description-input:focus, .review-box-rating-input:focus{
+.review-box-title-input:focus, .review-box-description-input:focus{
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
     outline: none;
@@ -731,6 +736,41 @@ body {
 
 .review-box-title-input{
     font-weight: bold;
+}
+
+.review-box-rating-input{
+    position: relative;
+    height: 30vh;
+    width: 30vh;
+    top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+.review-circle-piece{
+    position: absolute;
+    width: 25px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.review-rating-piece{
+    position: absolute;
+    font-size: 4rem;
+    color: white;
+    user-select: none;
+    font-family: Inter, serif;
+}
+
+.review-circle-piece:hover{
+    cursor: pointer;
 }
 
 .giga-footer{
