@@ -4,7 +4,7 @@ import {useAuth} from "./auth.js"
 import {useEffect, useState} from "react";
 
 async function loginGetToken(usermail, password) {
-    const url = 'http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/login';
+    const url = 'https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/login';
     const data = {
         email: usermail,
         password: password,

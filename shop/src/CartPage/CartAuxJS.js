@@ -20,7 +20,7 @@ export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs
 }
 
 async function sendDelete(itemID, updateItemsData, listOfFavs, updateFavs){
-    await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+    await fetch(`https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ async function sendDelete(itemID, updateItemsData, listOfFavs, updateFavs){
 }
 
 async function sendUpdate(itemID, quantity, updateItemsData, listOfFavs, updateFavs){
-    await fetch(`http://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+    await fetch(`https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
