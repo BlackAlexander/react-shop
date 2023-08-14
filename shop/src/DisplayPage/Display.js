@@ -16,6 +16,8 @@ export default function Display() {
     const [key, setKey] = useState(0);
     const [smallitems, setSmallitems] = useState([])
     const [reviewIsOn, setReviewIsOn] = useState(false);
+    const [idToReview, setIdToReview] = useState(1);
+    const [titleToReview, setTitleToReview] = useState("");
 
     useEffect(()=>{
         setUrl(getURL());
@@ -30,10 +32,9 @@ export default function Display() {
         setSmallitems(newsmall);
     }
 
-    let idToReview = 1;
-
-    const showreview = (newid) => {
-        idToReview = newid;
+    const showreview = (newid, newtitle) => {
+        setIdToReview(newid.slice(4));
+        setTitleToReview(newtitle);
         setReviewIsOn(true)
         if (newid === "-1"){
             setReviewIsOn(false);
@@ -50,7 +51,7 @@ export default function Display() {
             {shouldRenderProducts && <ProductsDisplay fetchUrl={url} key={key} showreview = {showreview}/>}
             <PaginationBar updateurl={updateurl}/>
             <div id="cart-popup">item added to cart</div>
-            {reviewIsOn && <Review idToReview={idToReview} showreview={showreview}/>}
+            {reviewIsOn && <Review idToReview={idToReview} showreview={showreview} titleToReview={titleToReview}/>}
             {/*<Review idToReview={idToReview} showreview={showreview}/>*/}
             <Footer />
         </>

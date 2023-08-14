@@ -609,10 +609,128 @@ body {
 
 .review-page{
     position: fixed;
-    height: 80vh;
-    width: 100vh;
+    width: 100vw;
+    height: 100vh;
+}
+
+.review-background{
+    position: fixed;
+    height: 88vh;
+    width: 100vw;
+    top: 12vh;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.review-background:hover{
+    cursor: pointer;
+}
+
+.review-container{
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 80vw;
+    left: 10vw;
+    height: 70vh;
     top: 20vh;
+    z-index: 999;
+    border-radius: 15px;
+}
+
+.review-container-title{
+    text-transform: lowercase;
+    width: 100%;
+    font-family: JMH, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7%;
+    font-size: 1.5rem;
+    user-select: none;
+    padding-top: 30px;
+    white-space: nowrap;
+}
+
+.review-box-title, .review-box-description, .review-box-rating{
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    position: fixed;
+}
+
+.review-box-title-title, .review-box-description-title, .review-box-rating-title{
+    width: 100%;
+    font-family: JMH, serif;
+    color: #e0e0e0;
+    font-size: 1.3rem;
+    display: flex;
     background-color: rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.review-box-title{
+    height: 10vh;
+    width: 35vw;
+    margin-left: 3vw;
+    margin-top: 4vh;
+}
+
+.review-box-description{
+    height: 45vh;
+    width: 35vw;
+    margin-left: 3vw;
+    margin-top: 17vh;
+}
+
+.review-box-rating{
+    height: 40vh;
+    width: 35vw;
+    margin-left: 42vw;
+    margin-top: 4vh;
+}
+
+.review-box-title-input, .review-box-description-input, .review-box-rating-input{
+    background-color: rgba(255, 255, 255, 0.2);
+    font-family: Constantia, serif;
+    border: none;
+    border-radius: 0;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 2rem;
+    width: 100%;
+    height: calc(100% - 30px);
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+    overflow-wrap: break-word;
+    resize: none;
+}
+
+.review-box-title-input{
+    padding-top: 12px;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.review-box-title-input:focus, .review-box-description-input:focus, .review-box-rating-input:focus{
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    outline: none;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.review-box-title-input{
+    font-weight: bold;
 }
 
 .giga-footer{

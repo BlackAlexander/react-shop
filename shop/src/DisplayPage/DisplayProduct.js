@@ -21,7 +21,7 @@ export default function Product({ itemId, itemCategory, itemImage, itemTitle, it
     }
 
     return <div className="shop-item" id={itemId} key={itemId}>
-        <div className="item-rate" onClick={() => {showreview(String(itemId));}}>📈</div>
+        <div className="item-rate" onClick={() => {showreview(String(itemId), itemTitle);}}>📈</div>
         <div className="item-category">{itemCategory}</div>
         <div className="item-heart" onClick={switchInFavs}>{isFavorite}</div>
         <img
