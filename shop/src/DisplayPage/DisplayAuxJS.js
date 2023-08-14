@@ -105,7 +105,7 @@ export function updatePages(){
     document.querySelector(".pagination-current").innerHTML = String(1);
 }
 
-export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate){
+export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate, showreview){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
@@ -136,7 +136,8 @@ export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate){
             itemPrice: currentItem.price,
             listOfFavs: listOfFavs,
             updateFavs: updateFavs,
-            navigate: navigate
+            navigate: navigate,
+            showreview: showreview
         }))
     }
     return list;
@@ -165,7 +166,7 @@ export function computeTotal(){
 
 export async function addToCart(itemID){
     const itemElement = document.getElementById(String(itemID));
-    const element = itemElement.getElementsByTagName("div")[4];
+    const element = itemElement.getElementsByTagName("div")[5];
     if (element.innerHTML === "🛒 Added!"){
         return;
     }

@@ -137,7 +137,6 @@ body {
     right: 15%;
     top: 2%;
 }
-
 .item-heart:hover{
     font-size: 150%;
     cursor: pointer;
@@ -148,6 +147,28 @@ body {
     right: 15.5%;
     font-size: 120%;
 }
+
+.item-rate{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 130%;
+    user-select: none;
+    right: 27%;
+    top: 2%;
+}
+.item-rate:hover{
+    font-size: 150%;
+    cursor: pointer;
+    right: 26%;
+}
+
+.item-rate:active{
+    right: 27%;
+    font-size: 120%;
+}
+
 
 .item-image{
     margin: auto;
@@ -584,6 +605,14 @@ body {
     background-color: rgb(169, 169, 169);
     background-image: none;
     cursor: pointer;
+}
+
+.review-page{
+    position: fixed;
+    height: 80vh;
+    width: 100vh;
+    top: 20vh;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .giga-footer{
