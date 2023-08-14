@@ -148,6 +148,9 @@ export function computeTotal(){
     let totalQuantity = 0;
     let itemsListHTML = document.getElementsByClassName("cart-product");
     let itemsList = Array.prototype.slice.call(itemsListHTML)
+    if (itemsList === undefined){
+        return;
+    }
     for (let i = 0; i < itemsList.length; i++){
         let currentMoney = parseInt((itemsList[i].querySelector(".cart-product-price").innerHTML).slice(1));
         let currentQuantity = parseInt(itemsList[i].querySelector(".cart-product-quantity").innerHTML);

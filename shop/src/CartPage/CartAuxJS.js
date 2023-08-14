@@ -108,6 +108,9 @@ export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFav
 
 function processItems(itemslist, updateItemsData, listOfFavs, updateFavs){
     let list = [];
+    if (itemslist === undefined){
+        return [];
+    }
     for (let i = 0; i < itemslist.length; i++){
         const currentItem = itemslist[i];
         list.push(CartProduct({

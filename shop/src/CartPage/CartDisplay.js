@@ -1,6 +1,12 @@
 import {returnCartItems} from "../CartPage/CartAuxJS";
+import {computeTotal} from "../DisplayPage/DisplayAuxJS";
+import {useEffect} from "react";
 export default function CartDisplay({updateItemsData, listOfFavs, updateFavs} ){
     const itemsList = returnCartItems("https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/", updateItemsData, listOfFavs, updateFavs);
+
+    useEffect(() =>{
+        computeTotal();
+    }, [])
 
     return <div className="cart-display">
         <h2 className="cart-title">YOUR CART</h2>
