@@ -2,7 +2,7 @@ import Display from './DisplayPage/Display.js'
 import Login from './LoginPage/Login.js'
 import Home from './HomePage/Home.js'
 import Account from './AccountPage/Account.js'
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, createHashRouter, RouterProvider} from "react-router-dom";
 import {AuthProvider, ProtectedRoute} from "./LoginPage/auth";
 import Cart from "./CartPage/Cart";
 import Preview from "./PreviewPage/Preview";
