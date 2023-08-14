@@ -773,6 +773,28 @@ body {
     cursor: pointer;
 }
 
+.review-publish{
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    height: 15vh;
+    border-radius: 15px;
+    width: 35vw;
+    margin-left: 42vw;
+    margin-top: 47vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inter, serif;
+    color: white;
+    overflow: hidden;
+    user-select: none;
+}
+
+.review-publish:hover{
+    background-color: rgba(56, 56, 56, 0.8);
+    cursor: pointer;
+}
+
 .giga-footer{
     /*visibility: hidden;*/
     /*position: fixed;*/

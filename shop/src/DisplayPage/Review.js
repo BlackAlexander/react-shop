@@ -47,7 +47,6 @@ function generate36(){
             } else {
                 selectedScore = Math.round((i/8.75+1) * 100) / 100
             }
-            console.log(selectedScore);
             ratingPiece.innerHTML = String(selectedScore) + "⭐";
         })
         container.append(newPiece);
@@ -75,6 +74,7 @@ export default function Review({idToReview, showreview, titleToReview}){
                 <div className="review-box-rating-title">rating</div>
                 <div className="review-box-rating-input"></div>
             </div>
+            <div className="review-publish">PUSH</div>
         </div>
     </div>
 }
