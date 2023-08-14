@@ -9,6 +9,7 @@
     left: 50%;
     /*margin-top: -15%;*/
     margin-left: -30%;
+    min-width: 500px;
 }
 
 .preview-image{
@@ -38,16 +39,68 @@
     left: 50%;
     bottom: 70%;
     width: 40%;
-    height: 30%;
+    height: 12%;
     text-align: justify;
     font-size: 0.8rem;
+    overflow: hidden;
+}
+
+.preview-ratings-holder{
+    /*background-color: #247027;*/
+    position: relative;
+    left: 50%;
+    bottom: 70%;
+    width: 40%;
+    height: 45%;
+    /*border-top: 2px solid;*/
+    /*border-bottom: 2px solid;*/
+    border-radius: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.rp-container{
+    background-color: rgba(252, 252, 252, 0.4);
+    margin: 5px 0;
+    border-radius: 2px;
+    width: 98%;
+    height: 4rem;
+}
+
+.rp-title{
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 75%;
+    font-weight: bold;
+    font-size: 1rem;
+    height: 1rem;
+    padding-left: 5px;
+    overflow: hidden;
+}
+
+.rp-description{
+    font-size: 1rem;
+    /*background-color: #151515;*/
+    height: 2rem;
+    overflow: auto;
+    padding-left: 5px;
+}
+
+.rp-rating{
+    position: relative;
+    font-size: 1rem;
+    bottom: 3.2rem;
+    height: 1rem;
+    text-align: right;
+    font-weight: bold;
+    width: 25%;
+    left: 75%;
 }
 
 .preview-price{
     /*background-color: cornsilk;*/
     position: relative;
     left: 50%;
-    bottom: 42%;
+    bottom: 70%;
     width: 20%;
     color: green;
     height: 10%;
@@ -111,6 +164,10 @@
     position: relative;
     font-size: 1vw;
     color: #f80;
+}
+
+#star-5 {
+    color: rgba(108, 108, 108, 0.5);
 }
 
 .preview-left-pic{
