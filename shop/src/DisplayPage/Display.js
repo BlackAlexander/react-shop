@@ -8,7 +8,7 @@ import ProductsDisplay from "./DisplayProductsDisplay";
 import PaginationBar from "./DisplayPaginationBar";
 import Footer from "./DisplayFooter";
 import AccountBar from "./DisplayAccount.js"
-import Review from "./Review";
+import Review from "./DisplayReview";
 
 export default function Display() {
     // console.clear();

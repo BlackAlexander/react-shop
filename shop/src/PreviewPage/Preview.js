@@ -7,6 +7,24 @@ import {useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectRatings} from "../redux/slices/ratings";
 
+function setStars(starrating){
+    for (let i = 1; i <= 5; i++){
+        const intrating = parseInt(starrating)+1;
+        const thestar = document.querySelector("#star-" + String(i));
+        if (thestar === null){
+            return;
+        }
+        if (intrating > i){
+            thestar.style.color = "rgba(0, 0, 0, 1)";
+        }
+        if (intrating < i){
+            thestar.style.color = "rgba(0, 0, 0, 0.01)";
+        }
+        if (Number(intrating) === Number(i)){
+            thestar.style.color = "rgba(0, 0, 0, " + String(starrating - Math.floor(starrating)) + ")";
+        }
+    }
+}
 
 function RatingPreview({rpId, rpTitle, rpDescription, rpRating}){
     let newId = "review-" + String(rpId);
@@ -21,6 +39,7 @@ export default function Preview(){
     /** @namespace product.images **/
     let location = useLocation();
     const id = location.pathname.slice(6);
+    const [starrating, setStarrating] = useState(0);
 
     const listOfRatings = useSelector(selectRatings);
     let theseRatings = [];
@@ -31,14 +50,21 @@ export default function Preview(){
         }
     }
     let ratings = [];
+    let average = 0;
     for (let i = 0; i < theseRatings.length; i++){
         let therating = theseRatings[i];
+        average += Number(therating.rating);
         ratings.push(RatingPreview({
             rpId: String(i),
             rpDescription: therating.description,
             rpRating: therating.rating,
             rpTitle: therating.title
         }))
+    }
+    if (theseRatings.length > 0){
+        average = Math.round((average/(theseRatings.length)) * 100) / 100;
+    } else {
+        average = "No."
     }
 
     const [currentItem, setCurrentItem] = useState(undefined);
@@ -51,15 +77,16 @@ export default function Preview(){
         if (product) {
             setCurrentItem(product);
             setCurrentImage(product.images[0]);
+            setStarrating(product.rating);
         }
-    }, [product]);
+    }, [product, starrating]);
 
     if(currentItem === undefined){
         return (<></>);
     }
 
     const images = currentItem.images;
-    const starrating = currentItem.rating;
+    setStars(starrating);
 
     function leftPic(){
         for (let i = 1; i < images.length; i++){
@@ -94,7 +121,7 @@ export default function Preview(){
                     <div className="preview-description">{currentItem.description}</div>
                     <div className="preview-ratings-holder">{ratings}</div>
                     <div className="preview-price">${currentItem.price}</div>
-                    {/*<div className="preview-add-to-cart" id="previewbtn">🛒 ADD</div>*/}
+                    <div className="preview-user-rating" >🌠{average}</div>
                     <div className="preview-rating">
                         <span className="star" id="star-1">⭐</span>
                         <span className="star" id="star-2">⭐</span>

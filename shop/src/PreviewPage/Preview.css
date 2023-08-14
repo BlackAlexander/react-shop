@@ -125,24 +125,19 @@
     justify-content: center;
 }
 
-.preview-added-to-cart{
+.preview-user-rating{
     /*background-color: rgba(26, 26, 26, 0.5);*/
     position: relative;
     width: 20%;
-    bottom: 52%;
+    bottom: 80%;
     height: 10%;
     left: 70%;
-    color: #8f8f8f;
+    color: #000000;
     font-size: 2rem;
     user-select: none;
-    cursor:default;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.preview-add-to-cart:hover{
-    background-color: rgba(70, 70, 70, 0.5);
 }
 
 .preview-rating{
@@ -166,9 +161,6 @@
     color: #f80;
 }
 
-#star-5 {
-    color: rgba(108, 108, 108, 0.5);
-}
 
 .preview-left-pic{
     position: absolute;
