@@ -1,4 +1,6 @@
 import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {selectRatings, setRatings} from "../redux/slices/ratings";
 
 function generateHover(howMany){
     for (let i = 0; i < 36; i++){
@@ -62,15 +64,31 @@ export default function Review({idToReview, showreview, titleToReview}){
     useEffect(()=>{
         generate36();
     })
+    const dispatch = useDispatch();
+    const listOfRatings = useSelector(selectRatings);
+
+    const updateRatings = (newReview) => {
+        let newList = structuredClone(listOfRatings);
+        newList.push(newReview);
+        dispatch(setRatings(newList));
+    }
 
     function sendData(){
-        console.log(idToReview);
         const reviewTitle = document.querySelector(".review-box-title-input").value;
         const reviewDescription = document.querySelector(".review-box-description-input").value;
         const reviewRating = document.querySelector(".review-rating-piece").innerHTML.slice(0, -1);
-        console.log(reviewTitle);
-        console.log(reviewDescription);
-        console.log(reviewRating);
+        // console.log(idToReview);
+        // console.log(reviewTitle);
+        // console.log(reviewDescription);
+        // console.log(reviewRating);
+        const newReview = {
+            id: idToReview,
+            title: reviewTitle,
+            description: reviewDescription,
+            rating: reviewRating
+        }
+        console.log(newReview);
+        updateRatings(newReview);
     }
 
     return <div className="review-page">
