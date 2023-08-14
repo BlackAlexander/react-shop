@@ -740,9 +740,9 @@ body {
 
 .review-box-rating-input{
     position: relative;
-    height: 30vh;
-    width: 30vh;
-    top: 35px;
+    height: 28vh;
+    width: 28vh;
+    top: 3.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -752,8 +752,8 @@ body {
 
 .review-circle-piece{
     position: absolute;
-    width: 25px;
-    height: 20px;
+    width: 2.4vh;
+    height: 2.6vh;
     background-color: rgba(255, 255, 255, 0.4);
     display: flex;
     justify-content: center;
@@ -763,7 +763,7 @@ body {
 
 .review-rating-piece{
     position: absolute;
-    font-size: 4rem;
+    font-size: 5vh;
     color: white;
     user-select: none;
     font-family: Inter, serif;

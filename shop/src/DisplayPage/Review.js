@@ -28,7 +28,7 @@ function generate36(){
         newPiece.classList.add("review-circle-piece");
         newPiece.innerHTML = "";
         newPiece.id = "circlePiece" + String(i);
-        newPiece.style.transform = "rotate(" + String(i*10)+"deg)" + " translateY(-700%) ";
+        newPiece.style.transform = "rotate(" + String(i*10)+"deg)" + " translateY(-500%) ";
         newPiece.addEventListener("mouseover", function () {
             generateHover(i);
         })
