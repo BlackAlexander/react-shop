@@ -20,29 +20,29 @@ export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs
 }
 
 async function sendDelete(itemID, updateItemsData, listOfFavs, updateFavs){
-    await fetch(`https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+    await fetch(`http://127.0.0.1:42069/cart/643551875/${itemID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Internship-Auth': getToken()
         },
-    }).then(response => response.json()).then((json) => {
-        updateItemsData(processItems(json.data.products, updateItemsData, listOfFavs, updateFavs));
-        return processItems(json.data.products, updateItemsData, listOfFavs, updateFavs);
+    }).then(response => response.json()).then((data) => {
+        updateItemsData(processItems(data.products, updateItemsData, listOfFavs, updateFavs));
+        return processItems(data.products, updateItemsData, listOfFavs, updateFavs);
     });
 }
 
 async function sendUpdate(itemID, quantity, updateItemsData, listOfFavs, updateFavs){
-    await fetch(`https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75?products[]=${itemID}`, {
+    await fetch(`http://127.0.0.1:42069/cart/643551875/${itemID}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Internship-Auth': getToken()
         },
         body: JSON.stringify({ products: [{ id: itemID, quantity: quantity }] }),
-    }).then(response => response.json()).then((json) => {
-        updateItemsData(processItems(json.data.products, updateItemsData, listOfFavs, updateFavs));
-        return processItems(json.data.products, updateItemsData, listOfFavs, updateFavs);
+    }).then(response => response.json()).then((data) => {
+        updateItemsData(processItems(data.products, updateItemsData, listOfFavs, updateFavs));
+        return processItems(data.products, updateItemsData, listOfFavs, updateFavs);
     });
 }
 
@@ -84,7 +84,8 @@ export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFav
     // const cartId = "64d354490459b";
     // const cartId = "64ca3b5518e75"; <
     // const cartId = "64c38597d8f95";
-    const cartId = "64ca3b5518e75";
+    const cartId = "643551875";
+    // const cartId = "64ca3b5518e75";
     fetchUrl += cartId;
     useEffect( () => {
         let response = fetch(fetchUrl, {

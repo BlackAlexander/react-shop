@@ -205,7 +205,7 @@ function showCartAgain(element){
 async function addElementToCart(elementID){
     let itemID = String(elementID).slice(4);
 
-    return await fetch('https://vlad-matei.thrive-dev.bitstoneint.com/wp-json/internship-api/v1/cart/64ca3b5518e75', {
+    return await fetch('http://127.0.0.1:42069/cart/643551875', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
