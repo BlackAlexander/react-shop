@@ -38,9 +38,9 @@ export default function App(){
                         </ProtectedRoute>
                     } />
                     <Route path="/orders" element={
-                        <ProtectedRoute>
+                        // <ProtectedRoute>
                             <Orders />
-                        </ProtectedRoute>
+                        // </ProtectedRoute>
                     } />
                 </Routes>
             </AuthProvider>
