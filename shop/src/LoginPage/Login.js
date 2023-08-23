@@ -37,7 +37,6 @@ export default function Login() {
         try {
             const responseData = await loginGetToken(l_email, l_password);
             setResponse(responseData);
-            console.log(responseData);
             const userData = {
                 token: responseData.token, // Make sure to use the correct key from the response
                 id: responseData.id

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {computeTotal, getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
+import {computeTotal, getToken} from "../DisplayPage/DisplayAuxJS";
 import CartProduct from "../CartPage/CartProduct";
 
 export function undone(){
@@ -9,7 +9,7 @@ export function undone(){
 
 export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs, IDToUse){
     const actualId = itemID.slice(10);
-    console.log(sendDelete(actualId, updateItemsData, listOfFavs, updateFavs, IDToUse));
+    await sendDelete(actualId, updateItemsData, listOfFavs, updateFavs, IDToUse);
     const itemToDelete = document.getElementById(itemID);
     try {
         itemToDelete.remove();
@@ -56,7 +56,7 @@ export async function increaseQuantity(itemID, updateItemsData, listOfFavs, upda
     computeTotal();
     const actualId = itemID.slice(10);
     // const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "1", updateItemsData, listOfFavs, updateFavs, IDToUse));
+    await sendUpdate(actualId, "1", updateItemsData, listOfFavs, updateFavs, IDToUse);
 }
 
 export async function decreaseQuantity(itemID, updateItemsData, listOfFavs, updateFavs, IDToUse){
@@ -74,7 +74,7 @@ export async function decreaseQuantity(itemID, updateItemsData, listOfFavs, upda
     computeTotal();
     const actualId = itemID.slice(10);
     // const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "-1", updateItemsData, listOfFavs, updateFavs, IDToUse));
+    await sendUpdate(actualId, "-1", updateItemsData, listOfFavs, updateFavs, IDToUse);
 }
 
 export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFavs, IDToUse){
@@ -89,7 +89,7 @@ export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFav
     // const IDToUse = getUserID();
     fetchUrl += IDToUse;
     useEffect( () => {
-        let response = fetch(fetchUrl, {
+        fetch(fetchUrl, {
             method: 'GET',
             headers: {
                 'Internship-Auth': getToken(),
