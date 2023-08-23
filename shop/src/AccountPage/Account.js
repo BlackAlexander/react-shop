@@ -1,5 +1,5 @@
 import './Account.css'
-import {decodeToken} from "../DisplayPage/DisplayAuxJS.js";
+import {decodeToken, getUserID} from "../DisplayPage/DisplayAuxJS.js";
 import {useEffect, useState} from "react";
 import CartHeader from "../CartPage/CartHeader";
 import {useAuth} from "../LoginPage/auth.js";
@@ -9,6 +9,18 @@ export default function Login() {
     useEffect(()=>{
         setMail(decodeToken());
     }, [])
+
+    async function deleteTokens(){
+        const url = 'http://127.0.0.1:42069/user/logout';
+        const IDToUse = getUserID();
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'id': IDToUse
+            }
+        });
+    }
 
     const auth = useAuth();
     return (
@@ -25,7 +37,7 @@ export default function Login() {
                 <div className="account-title">address</div>
                 <div className="account-value">Calea Turzii</div>
             </div>
-            <div className="account-logout" onClick={() => {auth.logout();}}></div>
+            <div className="account-logout" onClick={() => {deleteTokens().then(); auth.logout();}}></div>
         </>
     )
 }
