@@ -18,7 +18,7 @@
   },
   "name": "ljg0t8",
   "version": "0.0.0",
-  "homepage": "https://BlackAlexander.github.io/react-shop/#",
+  "homepage": "https://BlackAlexander.github.io/react-shop/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

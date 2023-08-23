@@ -8,6 +8,7 @@ import Cart from "./CartPage/Cart";
 import Preview from "./PreviewPage/Preview";
 import {Provider} from "react-redux";
 import {store} from "./redux/store.js"
+import Orders from "./OrdersPage/Orders";
 
 export default function App(){
     return (
@@ -34,6 +35,11 @@ export default function App(){
                     <Route path="/cart" element={
                         <ProtectedRoute>
                             <Cart />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/orders" element={
+                        <ProtectedRoute>
+                            <Orders />
                         </ProtectedRoute>
                     } />
                 </Routes>
