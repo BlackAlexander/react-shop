@@ -23,7 +23,7 @@ export default function OrderPreview(){
                     </div>
                     <div className="order-product" id="order-product-3">
                         <img src="https://picsum.photos/89/100" alt="order product" className="order-product-pic"/>
-                        <div className="order-product-title">Bob Tyler</div>
+                        <div className="order-product-title">Bob</div>
                         <div className="order-product-price">$293.4</div>
                         <div className="order-product-quantity">x4</div>
                     </div>
