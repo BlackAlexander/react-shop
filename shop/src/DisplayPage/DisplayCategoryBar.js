@@ -10,7 +10,7 @@ function Categories(){
     const [items, setItems] = useState([]);
     const list = [];
     useEffect(() => {
-        fetch("https://dummyjson.com/products/categories")
+        fetch("http://127.0.0.1:42069/products/categories")
             .then(response => response.json())
             .then(data => {
                 setItems(data);

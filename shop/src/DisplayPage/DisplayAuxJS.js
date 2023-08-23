@@ -63,12 +63,12 @@ export function decodeToken(){
 export function getURL(){
     const itemsSelector = document.querySelector(".pagination-per-page");
     if (itemsSelector === null){
-        return "https://dummyjson.com/products?limit=6";
+        return "http://127.0.0.1:42069/products?limit=6";
     }
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
     let skip = (currentPage-1)*itemsPerPage;
-    let finalURL = "https://dummyjson.com/products";
+    let finalURL = "http://127.0.0.1:42069/products";
     const categorySelector = document.querySelector(".category-options");
     const category = document.querySelector(".category-options")[categorySelector.selectedIndex].text;
     document.querySelector(".hide-pagination").style.visibility="hidden";
@@ -94,7 +94,7 @@ export function getURL(){
             return finalURL;
         }
         document.querySelector(".hide-pagination").style.visibility="visible";
-        return "https://dummyjson.com/products/search?q="+String(valueSearch);
+        return "http://127.0.0.1:42069/products/search?q="+String(valueSearch);
     } else {
         document.getElementById("search-query-bar").value = "";
     }
@@ -128,7 +128,7 @@ export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate, s
                 return [];
             });
     }, []);
-    if(items.length === 0){
+    if(!items || items.length === 0){
         return [];
     }
     for (let i = 0; i < items.products.length; i++){
