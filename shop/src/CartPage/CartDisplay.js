@@ -1,8 +1,8 @@
 import {returnCartItems} from "../CartPage/CartAuxJS";
 import {computeTotal} from "../DisplayPage/DisplayAuxJS";
 import {useEffect} from "react";
-export default function CartDisplay({updateItemsData, listOfFavs, updateFavs} ){
-    const itemsList = returnCartItems("http://127.0.0.1:42069/cart/", updateItemsData, listOfFavs, updateFavs);
+export default function CartDisplay({updateItemsData, listOfFavs, updateFavs, IDToUse} ){
+    const itemsList = returnCartItems("http://127.0.0.1:42069/cart/", updateItemsData, listOfFavs, updateFavs, IDToUse);
 
     useEffect(() =>{
         computeTotal();

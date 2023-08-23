@@ -49,6 +49,11 @@ export function getToken(){
     return tokenObject.token;
 }
 
+export function getUserID(){
+    const tokenObject = JSON.parse(window.localStorage.getItem('user'))
+    return tokenObject.id;
+}
+
 export function decodeToken(){
     const decodedToken = atob(getToken());
     const breakIndex = decodedToken.indexOf("|");
@@ -105,7 +110,7 @@ export function updatePages(){
     document.querySelector(".pagination-current").innerHTML = String(1);
 }
 
-export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate, showreview){
+export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate, showreview, IDToUse){
     /** @namespace currentItem.thumbnail **/
     /** @namespace currentItem.price **/
     /** @namespace items.products **/
@@ -137,7 +142,8 @@ export function returnInitialItems(fetchUrl, listOfFavs, updateFavs, navigate, s
             listOfFavs: listOfFavs,
             updateFavs: updateFavs,
             navigate: navigate,
-            showreview: showreview
+            showreview: showreview,
+            IDToUse: IDToUse
         }))
     }
     return list;
@@ -167,13 +173,13 @@ export function computeTotal(){
     quantityItem.innerHTML = String(totalQuantity);
 }
 
-export async function addToCart(itemID){
+export async function addToCart(itemID, IDToUse){
     const itemElement = document.getElementById(String(itemID));
     const element = itemElement.getElementsByTagName("div")[5];
     if (element.innerHTML === "🛒 Added!"){
         return;
     }
-    addElementToCart(itemID).then();
+    addElementToCart(itemID, IDToUse).then();
     element.innerHTML = "🛒 Added!";
     element.classList.remove("item-add-to-cart");
     element.classList.add("item-added-to-cart");
@@ -190,6 +196,9 @@ function showCartAgain(element){
     element.classList.remove("item-added-to-cart");
     element.classList.add("item-add-to-cart");
     let popup = document.getElementById("cart-popup");
+    if (!popup){
+        return;
+    }
     popup.style.opacity = "1";
     let fadeEffect = setInterval(function () {
         if (popup.style.opacity > 0.4) {
@@ -202,17 +211,16 @@ function showCartAgain(element){
 }
 
 
-async function addElementToCart(elementID){
+async function addElementToCart(elementID, IDToUse){
     let itemID = String(elementID).slice(4);
-
-    return await fetch('http://127.0.0.1:42069/cart/643551875', {
+    return await fetch(`http://127.0.0.1:42069/cart/643551875`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Internship-Auth': getToken(),
         },
         body: JSON.stringify({
-            userId: 1,
+            userId: IDToUse,
             products: [
                 {
                     id: itemID,

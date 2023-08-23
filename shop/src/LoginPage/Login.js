@@ -1,7 +1,7 @@
 import './Login.css'
 import {Link} from "react-router-dom";
 import {useAuth} from "./auth.js"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 async function loginGetToken(usermail, password) {
     const url = 'http://127.0.0.1:42069/user';
@@ -37,8 +37,10 @@ export default function Login() {
         try {
             const responseData = await loginGetToken(l_email, l_password);
             setResponse(responseData);
+            console.log(responseData);
             const userData = {
                 token: responseData.token, // Make sure to use the correct key from the response
+                id: responseData.id
             };
             await auth.login(userData);
         } catch (error) {

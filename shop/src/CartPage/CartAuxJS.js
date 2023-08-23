@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {computeTotal, getToken} from "../DisplayPage/DisplayAuxJS";
+import {computeTotal, getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
 import CartProduct from "../CartPage/CartProduct";
 
 export function undone(){
@@ -7,9 +7,9 @@ export function undone(){
 
 }
 
-export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs){
+export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs, IDToUse){
     const actualId = itemID.slice(10);
-    console.log(sendDelete(actualId, updateItemsData, listOfFavs, updateFavs));
+    console.log(sendDelete(actualId, updateItemsData, listOfFavs, updateFavs, IDToUse));
     const itemToDelete = document.getElementById(itemID);
     try {
         itemToDelete.remove();
@@ -19,21 +19,21 @@ export async function deleteItem(itemID, updateItemsData, listOfFavs, updateFavs
     computeTotal();
 }
 
-async function sendDelete(itemID, updateItemsData, listOfFavs, updateFavs){
-    await fetch(`http://127.0.0.1:42069/cart/643551875/${itemID}`, {
+async function sendDelete(itemID, updateItemsData, listOfFavs, updateFavs, IDToUse){
+    await fetch(`http://127.0.0.1:42069/cart/${IDToUse}/${itemID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Internship-Auth': getToken()
         },
     }).then(response => response.json()).then((data) => {
-        updateItemsData(processItems(data.products, updateItemsData, listOfFavs, updateFavs));
-        return processItems(data.products, updateItemsData, listOfFavs, updateFavs);
+        updateItemsData(processItems(data.products, updateItemsData, listOfFavs, updateFavs, IDToUse));
+        return processItems(data.products, updateItemsData, listOfFavs, updateFavs, IDToUse);
     });
 }
 
-async function sendUpdate(itemID, quantity, updateItemsData, listOfFavs, updateFavs){
-    await fetch(`http://127.0.0.1:42069/cart/643551875/${itemID}`, {
+async function sendUpdate(itemID, quantity, updateItemsData, listOfFavs, updateFavs, IDToUse){
+    await fetch(`http://127.0.0.1:42069/cart/${IDToUse}/${itemID}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -41,12 +41,12 @@ async function sendUpdate(itemID, quantity, updateItemsData, listOfFavs, updateF
         },
         body: JSON.stringify({ products: [{ id: itemID, quantity: quantity }] }),
     }).then(response => response.json()).then((data) => {
-        updateItemsData(processItems(data.products, updateItemsData, listOfFavs, updateFavs));
-        return processItems(data.products, updateItemsData, listOfFavs, updateFavs);
+        updateItemsData(processItems(data.products, updateItemsData, listOfFavs, updateFavs, IDToUse));
+        return processItems(data.products, updateItemsData, listOfFavs, updateFavs, IDToUse);
     });
 }
 
-export async function increaseQuantity(itemID, updateItemsData, listOfFavs, updateFavs){
+export async function increaseQuantity(itemID, updateItemsData, listOfFavs, updateFavs, IDToUse){
     const item = document.getElementById(itemID);
     let minusButton = item.getElementsByClassName("cart-product-minus")[0];
     minusButton.style.opacity = "1";
@@ -56,10 +56,10 @@ export async function increaseQuantity(itemID, updateItemsData, listOfFavs, upda
     computeTotal();
     const actualId = itemID.slice(10);
     // const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "1", updateItemsData, listOfFavs, updateFavs));
+    console.log(sendUpdate(actualId, "1", updateItemsData, listOfFavs, updateFavs, IDToUse));
 }
 
-export async function decreaseQuantity(itemID, updateItemsData, listOfFavs, updateFavs){
+export async function decreaseQuantity(itemID, updateItemsData, listOfFavs, updateFavs, IDToUse){
     const item = document.getElementById(itemID);
     let quantityBox = item.getElementsByClassName("cart-product-quantity")[0];
     if(parseInt(quantityBox.innerHTML) === 1){
@@ -74,19 +74,20 @@ export async function decreaseQuantity(itemID, updateItemsData, listOfFavs, upda
     computeTotal();
     const actualId = itemID.slice(10);
     // const quantity = quantityBox.innerHTML;
-    console.log(sendUpdate(actualId, "-1", updateItemsData, listOfFavs, updateFavs));
+    console.log(sendUpdate(actualId, "-1", updateItemsData, listOfFavs, updateFavs, IDToUse));
 }
 
-export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFavs){
+export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFavs, IDToUse){
     /** @namespace currentItem.quantity **/
     const [items, setItems] = useState([]);
     let list = [];
     // const cartId = "64d354490459b";
     // const cartId = "64ca3b5518e75"; <
     // const cartId = "64c38597d8f95";
-    const cartId = "643551875";
+    // const cartId = "643551875";
     // const cartId = "64ca3b5518e75";
-    fetchUrl += cartId;
+    // const IDToUse = getUserID();
+    fetchUrl += IDToUse;
     useEffect( () => {
         let response = fetch(fetchUrl, {
             method: 'GET',
@@ -99,15 +100,15 @@ export function returnCartItems(fetchUrl, updateItemsData, listOfFavs, updateFav
                 setItems(data);
             })
     }, [])
-    if(items.length === 0){
+    if(!items || items.length === 0){
         return [];
     }
-    list = processItems(items.products, updateItemsData, listOfFavs, updateFavs);
+    list = processItems(items.products, updateItemsData, listOfFavs, updateFavs, IDToUse);
     computeTotal();
     return list;
 }
 
-function processItems(itemslist, updateItemsData, listOfFavs, updateFavs){
+function processItems(itemslist, updateItemsData, listOfFavs, updateFavs, IDToUse){
     let list = [];
     if (itemslist === undefined){
         return [];
@@ -122,7 +123,8 @@ function processItems(itemslist, updateItemsData, listOfFavs, updateFavs){
             itemTitle: currentItem.title,
             updateItemsData: updateItemsData,
             listOfFavs: listOfFavs,
-            updateFavs: updateFavs
+            updateFavs: updateFavs,
+            IDToUse: IDToUse
         }))
     }
     return list;

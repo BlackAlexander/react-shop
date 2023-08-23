@@ -6,6 +6,7 @@ import CartFooter from "../CartPage/CartFooter";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {selectFavs, setFavs} from "../redux/slices/favorites";
+import {getUserID} from "../DisplayPage/DisplayAuxJS";
 
 export default function Cart(){
     const [cartItems, setCartItems] = useState([])
@@ -15,6 +16,7 @@ export default function Cart(){
 
     const dispatch = useDispatch();
     const listOfFavs = useSelector(selectFavs);
+    const IDToUse = getUserID();
     const updateFavs = (newList) => {
         dispatch(setFavs(newList));
     }
@@ -22,7 +24,7 @@ export default function Cart(){
     return (
         <>
             <CartHeader />
-            <CartDisplay updateItemsData={updateItemsData} listOfFavs={listOfFavs} updateFavs={updateFavs}/>
+            <CartDisplay updateItemsData={updateItemsData} listOfFavs={listOfFavs} updateFavs={updateFavs} IDToUse={IDToUse}/>
             <CartSummary />
             <CartFooter />
         </>

@@ -77,17 +77,12 @@ export default function Review({idToReview, showreview, titleToReview}){
         const reviewTitle = document.querySelector(".review-box-title-input").value;
         const reviewDescription = document.querySelector(".review-box-description-input").value;
         const reviewRating = document.querySelector(".review-rating-piece").innerHTML.slice(0, -1);
-        // console.log(idToReview);
-        // console.log(reviewTitle);
-        // console.log(reviewDescription);
-        // console.log(reviewRating);
         const newReview = {
             id: idToReview,
             title: reviewTitle,
             description: reviewDescription,
             rating: reviewRating
         }
-        console.log(newReview);
         updateRatings(newReview);
     }
 
