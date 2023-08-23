@@ -60,6 +60,11 @@ export function decodeToken(){
     return decodedToken.slice(0, breakIndex);
 }
 
+export function clearCategory(){
+    const categorySelector = document.querySelector(".category-options");
+    categorySelector.selectedIndex = 0;
+}
+
 export function getURL(){
     const itemsSelector = document.querySelector(".pagination-per-page");
     if (itemsSelector === null){
@@ -77,6 +82,7 @@ export function getURL(){
         finalURL += category;
         document.querySelector(".pagination-current").innerHTML = String(1);
         document.querySelector(".pagination-total").innerHTML = "/" + String(1);
+        document.querySelector(".hide-pagination").style.visibility="visible";
     } else {
         const itemsSelector = document.querySelector(".pagination-per-page");
         const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);

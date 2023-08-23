@@ -1,4 +1,4 @@
-import {getURL, goBackPage, goNextPage, updatePages} from "./DisplayAuxJS";
+import {clearCategory, getURL, goBackPage, goNextPage, updatePages} from "./DisplayAuxJS";
 
 export default function PaginationBar( {updateurl} ){
     const handlePageChange = () => {
@@ -22,7 +22,7 @@ export default function PaginationBar( {updateurl} ){
                 </select>
                 <div className="pagination-final">per page</div>
             </div>
-            <div className="hide-pagination" onClick={() => {handlePageChange();}}>🏠</div>
+            <div className="hide-pagination" onClick={() => {clearCategory(); handlePageChange();}}>🏠</div>
         </>
     )
 }
