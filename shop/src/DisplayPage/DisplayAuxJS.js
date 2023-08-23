@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Product from "./DisplayProduct";
 
-export function goBackPage(){
+export function goBackPage(count){
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
     if (currentPage === 1){
         return;
@@ -17,18 +17,16 @@ export function goBackPage(){
 
     const itemsSelector = document.querySelector(".pagination-per-page");
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
-    const totalItems = 100;
-    let totalPages = Math.ceil(totalItems/itemsPerPage);
+    let totalPages = Math.ceil(count/itemsPerPage);
     document.querySelector(".pagination-current").innerHTML = String(currentPage - 1);
     document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
 }
 
-export function goNextPage(){
+export function goNextPage(count){
     const currentPage = parseInt(document.querySelector(".pagination-current").innerHTML);
     const itemsSelector = document.querySelector(".pagination-per-page");
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
-    const totalItems = 100;
-    let totalPages = Math.ceil(totalItems/itemsPerPage);
+    let totalPages = Math.ceil(count/itemsPerPage);
     if (currentPage === totalPages){
         return;
     }
@@ -65,7 +63,7 @@ export function clearCategory(){
     categorySelector.selectedIndex = 0;
 }
 
-export function getURL(){
+export function getURL(count){
     const itemsSelector = document.querySelector(".pagination-per-page");
     if (itemsSelector === null){
         return "http://127.0.0.1:42069/products?limit=6";
@@ -76,7 +74,6 @@ export function getURL(){
     let finalURL = "http://127.0.0.1:42069/products";
     const categorySelector = document.querySelector(".category-options");
     const category = document.querySelector(".category-options")[categorySelector.selectedIndex].text;
-    document.querySelector(".hide-pagination").style.visibility="hidden";
     if(category !== "all"){
         finalURL += "/category/";
         finalURL += category;
@@ -86,9 +83,9 @@ export function getURL(){
     } else {
         const itemsSelector = document.querySelector(".pagination-per-page");
         const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
-        const totalItems = 100;
-        let totalPages = Math.ceil(totalItems/itemsPerPage);
+        let totalPages = Math.ceil(count/itemsPerPage);
         document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
+        document.querySelector(".hide-pagination").style.visibility="hidden";
 
     }
     finalURL += "?limit=" + String(itemsPerPage);
@@ -103,15 +100,18 @@ export function getURL(){
         return "http://127.0.0.1:42069/products/search?q="+String(valueSearch);
     } else {
         document.getElementById("search-query-bar").value = "";
+        document.querySelector(".hide-pagination").style.visibility="hidden";
+    }
+    if(category !== "all"){
+        document.querySelector(".hide-pagination").style.visibility="visible";
     }
     return finalURL;
 }
 
-export function updatePages(){
+export function updatePages(count){
     const itemsSelector = document.querySelector(".pagination-per-page");
     const itemsPerPage = parseInt(document.querySelector(".pagination-per-page")[itemsSelector.selectedIndex].text);
-    const totalItems = 100;
-    let totalPages = Math.ceil(totalItems/itemsPerPage);
+    let totalPages = Math.ceil(count/itemsPerPage);
     document.querySelector(".pagination-total").innerHTML = "/" + String(totalPages);
     document.querySelector(".pagination-current").innerHTML = String(1);
 }

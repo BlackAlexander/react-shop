@@ -14,14 +14,26 @@ export default function Display() {
     // console.clear();
     const [url, setUrl] = useState("");
     const [key, setKey] = useState(0);
+    const [key2, setKey2] = useState("");
     const [smallitems, setSmallitems] = useState([])
     const [reviewIsOn, setReviewIsOn] = useState(false);
     const [idToReview, setIdToReview] = useState(1);
     const [titleToReview, setTitleToReview] = useState("");
+    const [count, setCount] = useState(0);
 
-    useEffect(()=>{
-        setUrl(getURL());
-    }, [])
+    useEffect(() => {
+        fetch("http://127.0.0.1:42069/products/count")
+            .then(response => response.json())
+            .then(data => {
+                setCount(parseInt(data));
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        setUrl(getURL(count));
+        let newKey = "Pg" + String(count);
+        setKey2(newKey);
+    }, []);
 
     const updateurl = (newurl) => {
         setUrl(newurl);
@@ -45,11 +57,11 @@ export default function Display() {
     return (
         <>
             <Header updatesmall={updatesmall}/>
-            <CategoryBar updateurl={updateurl}/>
+            <CategoryBar updateurl={updateurl} count={count}/>
             <AccountBar />
-            <SearchBar updateurl={updateurl}/>
+            <SearchBar updateurl={updateurl} count={count}/>
             {shouldRenderProducts && <ProductsDisplay fetchUrl={url} key={key} showreview = {showreview}/>}
-            <PaginationBar updateurl={updateurl}/>
+            <PaginationBar updateurl={updateurl} count={count} key={key2}/>
             <div id="cart-popup">item added to cart</div>
             {reviewIsOn && <Review idToReview={idToReview} showreview={showreview} titleToReview={titleToReview}/>}
             {/*<Review idToReview={idToReview} showreview={showreview}/>*/}

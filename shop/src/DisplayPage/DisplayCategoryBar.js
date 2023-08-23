@@ -32,10 +32,10 @@ function Categories(){
     return list;
 }
 
-export default function CategoryBar( {updateurl} ){
+export default function CategoryBar( {updateurl, count} ){
     const handlePageChange = () => {
         document.querySelector(".pagination-current").innerHTML = String(1);
-        const newContent = getURL();
+        const newContent = getURL(count);
         updateurl(newContent);
     };
 

@@ -1,8 +1,8 @@
 import {getURL} from "./DisplayAuxJS";
 
-export default function SearchBar( {updateurl} ){
+export default function SearchBar( {updateurl, count} ){
     const handlePageChange = () => {
-        const newContent = getURL();
+        const newContent = getURL(count);
         updateurl(newContent);
     }
 

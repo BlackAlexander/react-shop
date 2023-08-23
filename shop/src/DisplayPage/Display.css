@@ -587,7 +587,7 @@ body {
 }
 
 .hide-pagination{
-    /*visibility: hidden;*/
+    visibility: hidden;
     /*background-color: rgb(208, 208, 208);*/
     background-image: url("../images/dark-texture.jpg");
     height: 4vh;
