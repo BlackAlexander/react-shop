@@ -14,8 +14,16 @@
 }
 
 @keyframes orders-expand{
-    from{height: 40px;}
-    to{height: 60%;}
+    from{
+        width: 40px;
+        overflow: hidden;
+        padding-right: 15px;
+    }
+    to{
+        width: 30%;
+        overflow: hidden;
+        padding-right: 15px;
+    }
 }
 
 .order-preview-container{
@@ -231,7 +239,7 @@
     left: 2%;
     height: 80%;
     width: 10%;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .order-product-title{
