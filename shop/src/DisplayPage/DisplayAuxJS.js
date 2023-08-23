@@ -213,7 +213,7 @@ function showCartAgain(element){
 
 async function addElementToCart(elementID, IDToUse){
     let itemID = String(elementID).slice(4);
-    return await fetch(`http://127.0.0.1:42069/cart/643551875`, {
+    return await fetch(`http://127.0.0.1:42069/cart/${IDToUse}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
