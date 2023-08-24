@@ -29,7 +29,7 @@
     position: fixed;
     width: 500px;
     height: 50px;
-    background-color: rgba(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.85);
     top: 15vh;
     border-radius: 15px;
     display: flex;
@@ -38,7 +38,23 @@
     font-weight: bold;
     font-family: "Inter", serif;
     font-size: 30px;
+    animation: order-now;
+    animation-duration: 1s;
+    overflow: hidden;
 }
+
+@keyframes order-now{
+    from{
+        width: 10px;
+        height: 10px;
+        background-color: red;
+    }
+    to {
+        width: 500px;
+        height: 50px;
+    }
+}
+
 
 .call-to-order-advanced{
     position: fixed;
@@ -56,4 +72,104 @@
     overflow: hidden;
     white-space: nowrap;
     padding-left: 32px;
+    animation: threat;
+    animation-duration: 10s;
+}
+
+@keyframes threat{
+    from{
+        background-color: rgba(255, 255, 255, 0);
+        color: transparent;
+    }
+    to {
+        background-color: rgba(255, 255, 255, 0.5);
+        color: black;
+    }
+}
+
+
+.order-data-container{
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 80vw;
+    height: 50vh;
+    top: calc(25vh + 50px);
+    left: 10vw;
+    border-radius: 10px;
+    min-width: 650px;
+}
+
+.order-data-address{
+    background-color: green;
+    position: absolute;
+    width: 30%;
+    left: 5%;
+}
+
+.order-data-address-input{
+    background-color: gray;
+    position: absolute;
+    width: 30%;
+    left: 5%;
+    top: 20%;
+}
+
+.order-data-payment{
+    background-color: #ff8800;
+    position: absolute;
+    width: 30%;
+    left: 5%;
+    top: 30%;
+}
+
+.order-data-payment-card, .order-data-payment-cash{
+    background-color: #ff8800;
+    position: absolute;
+    width: 15%;
+    left: 5%;
+    top: 35%;
+}
+
+.order-data-payment-cash{
+    left: 20%;
+}
+
+.order-friendly-picture{
+    /*background-color: #002f00;*/
+    position: absolute;
+    width: 30%;
+    height: 60%;
+    left: 5%;
+    top: 40%;
+    background-image: url("../images/man-holding-package.png");
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(1);
+}
+
+.place-order-products{
+    position: absolute;
+    width: 50%;
+    background-color: #519a54;
+    height: 70%;
+    left: 45%;
+    top: 5%;
+}
+
+.order-data-total{
+    position: absolute;
+    background-color: #151515;
+    width: 50%;
+    height: 10%;
+    left: 45%;
+    top: 75%;
+}
+
+.order-button{
+    position: absolute;
+    background-color: darkturquoise;
+    width: 50%;
+    height: 10%;
+    left: 45%;
+    top: 85%;
 }
