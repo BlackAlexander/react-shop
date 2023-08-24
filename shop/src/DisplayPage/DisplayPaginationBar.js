@@ -1,5 +1,4 @@
 import {clearCategory, getURL, goBackPage, goNextPage, updatePages} from "./DisplayAuxJS";
-import {useEffect, useState} from "react";
 
 export default function PaginationBar( {updateurl, count} ){
 
@@ -8,12 +7,14 @@ export default function PaginationBar( {updateurl, count} ){
         updateurl(newContent);
     };
 
+    const initialPages = "/" + String(Math.ceil(count/6));
+
     return (
         <>
             <div className="pagination-bar">
                 <div className="pagination-btn-back" onClick={() => {goBackPage(count); handlePageChange();}}>&lt;</div>
                 <div className="pagination-current">1</div>
-                <div className="pagination-total">/17</div>
+                <div className="pagination-total">{initialPages}</div>
                 <div className="pagination-btn-next" onClick={() => {goNextPage(count); handlePageChange();}}>&gt;</div>
                 <select className="pagination-per-page" onChange={() => {updatePages(count);handlePageChange();}}>
                     <option value="6">6</option>
