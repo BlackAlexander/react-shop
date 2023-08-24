@@ -68,7 +68,7 @@
     width: 30%;
     height: 7%;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 7%;
     user-select: none;
     background-color: black;
     color: white;
@@ -79,6 +79,25 @@
 }
 
 .login-enter:hover{
+    background-color: #282828;
+    cursor: pointer;
+}
+
+.login-register{
+    width: 30%;
+    height: 7%;
+    text-align: center;
+    margin-top: 3%;
+    user-select: none;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.login-register:hover{
     background-color: #282828;
     cursor: pointer;
 }

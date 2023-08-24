@@ -1,7 +1,6 @@
 import './Login.css'
 import {Link} from "react-router-dom";
 import {useAuth} from "./auth.js"
-import {useState} from "react";
 
 async function loginGetToken(usermail, password) {
     const url = 'http://127.0.0.1:42069/user';
@@ -27,7 +26,6 @@ async function loginGetToken(usermail, password) {
 }
 
 export default function Login() {
-    const [response, setResponse] = useState(null);
     const auth = useAuth();
 
     const irinaLogIn = async () => {
@@ -36,9 +34,8 @@ export default function Login() {
 
         try {
             const responseData = await loginGetToken(l_email, l_password);
-            setResponse(responseData);
             const userData = {
-                token: responseData.token, // Make sure to use the correct key from the response
+                token: responseData.token,
                 id: responseData.id
             };
             await auth.login(userData);
@@ -68,6 +65,12 @@ export default function Login() {
                 {/*<div className="login-enter ">*/}
                     <Link to="/shop" style={{ textDecoration: 'none', color: 'white' }}>
                     enter
+                    </Link>
+                </div>
+                <div className="login-register">
+                {/*<div className="login-enter ">*/}
+                    <Link to="/register" style={{ textDecoration: 'none', color: 'white' }}>
+                    register
                     </Link>
                 </div>
             </div>
