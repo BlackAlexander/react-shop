@@ -53,16 +53,21 @@
 
 
 .orders-title{
-    /*background-color: #345e26;*/
+    margin-top: 0;
+    margin-bottom: 0;
     position: fixed;
     color: white;
     font-weight: normal;
-    height: 3rem;
+    height: 13vh;
+    width: 50%;
     white-space: nowrap;
-    font-size: 3rem;
-    letter-spacing: 0.6rem;
-    top: 9%;
+    font-size: min(3rem, 10vh);
+    top: 12vh;
     left: 7%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
 }
 
 .order-item{
