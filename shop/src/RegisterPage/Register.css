@@ -1,0 +1,84 @@
+.register-holder {
+    font-family: "JMH", serif;
+    position: absolute;
+    width: 320px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 6px;
+    /*box-shadow: 0 1px 5px rgb(255, 255, 255);*/
+    top: calc(50% - 160px);
+    animation-name: register-expand;
+    animation-duration: 2s;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+@font-face{
+    font-family: "JMH";
+    src: url("../fonts/JMH-Typewriter.ttf")
+}
+
+@keyframes register-expand{
+    from{height: 40px;}
+    to{height: 400px;}
+}
+
+.register-title{
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    font-weight: bold;
+    user-select: none;
+    margin-bottom: 15px;
+}
+
+.register-email, .register-password, .register-name{
+    background-color: rgba(0, 0, 0, 1);
+    width: 100%;
+    margin-top: 20px;
+}
+
+.register-email-title, .register-password-title, .register-name-title{
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+    user-select: none;
+}
+
+.register-email-input, .register-password-input, .register-name-input{
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 2px;
+}
+
+.register-email-input:focus, .register-password-input:focus, .register-name-input:focus{
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.register-enter{
+    width: 30%;
+    height: 7%;
+    text-align: center;
+    margin-top: 10%;
+    user-select: none;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.register-enter:hover{
+    background-color: #282828;
+    cursor: pointer;
+}

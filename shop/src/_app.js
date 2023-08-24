@@ -9,6 +9,7 @@ import Preview from "./PreviewPage/Preview";
 import {Provider} from "react-redux";
 import {store} from "./redux/store.js"
 import Orders from "./OrdersPage/Orders";
+import Register from "./RegisterPage/Register";
 
 export default function App(){
     return (
@@ -17,6 +18,7 @@ export default function App(){
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="/shop" element={
                         <ProtectedRoute>
                             <Display />
@@ -38,9 +40,9 @@ export default function App(){
                         </ProtectedRoute>
                     } />
                     <Route path="/orders" element={
-                        // <ProtectedRoute>
+                        <ProtectedRoute>
                             <Orders />
-                        // </ProtectedRoute>
+                        </ProtectedRoute>
                     } />
                 </Routes>
             </AuthProvider>
