@@ -1,3 +1,31 @@
+.account-orders{
+    width: 250px;
+    height: 4vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 3px;
+    position: absolute;
+    top: 16vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 0 0 5px rgb(255, 255, 255)
+}
+
+.account-orders:after{
+    content:"<orders>";
+}
+
+.account-orders:hover:after{
+    content:"< orders >";
+}
+
+.account-orders:hover{
+    cursor: pointer;
+    background-color: rgba(197, 197, 197, 0.85);
+}
+
 .account-holder{
     font-family: "JMH", serif;
     position: absolute;

@@ -3,6 +3,7 @@ import {decodeToken, getUserID} from "../DisplayPage/DisplayAuxJS.js";
 import {useEffect, useState} from "react";
 import CartHeader from "../CartPage/CartHeader";
 import {useAuth} from "../LoginPage/auth.js";
+import {Link} from "react-router-dom";
 
 export default function Login() {
     const [mail, setMail] = useState("johndoe@mail.com");
@@ -26,6 +27,8 @@ export default function Login() {
     return (
         <>
             <CartHeader />
+            <Link to="/orders" className="account-orders" style={{ textDecoration: 'none' , color: '#262626' }}>
+            </Link>
             <div className="account-holder">
                 <div className="account-picture"></div>
                 <div className="account-title">name</div>
