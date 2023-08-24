@@ -10,6 +10,7 @@ import {Provider} from "react-redux";
 import {store} from "./redux/store.js"
 import Orders from "./OrdersPage/Orders";
 import Register from "./RegisterPage/Register";
+import Place from "./PlacePage/Place";
 
 export default function App(){
     return (
@@ -42,6 +43,11 @@ export default function App(){
                     <Route path="/orders" element={
                         <ProtectedRoute>
                             <Orders />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/place" element={
+                        <ProtectedRoute>
+                            <Place />
                         </ProtectedRoute>
                     } />
                 </Routes>

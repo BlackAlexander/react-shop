@@ -1,0 +1,59 @@
+.cool-fire-animation{
+    position: fixed;
+    width: 100vw;
+    height: 80vh;
+    top: 12vh;
+    left: 0;
+    background-image: url("../images/Cool Fire Animation for which I have No Copyright.gif");
+    background-size: cover;
+    background-position: center;
+    z-index: 999;
+    filter: opacity(0);
+    animation-name: fade-place;
+    animation-duration: 2s;
+    visibility: hidden;
+}
+
+@keyframes fade-place{
+    from{
+        filter: opacity(1);
+        visibility: visible;
+    }
+    to {
+        filter: opacity(0);
+        visibility: hidden;
+    }
+}
+
+.call-to-order{
+    position: fixed;
+    width: 500px;
+    height: 50px;
+    background-color: rgba(255, 255, 255);
+    top: 15vh;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: "Inter", serif;
+    font-size: 30px;
+}
+
+.call-to-order-advanced{
+    position: fixed;
+    width: 300px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    /*color: white;*/
+    top: calc(16vh + 50px);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "Inter", serif;
+    font-size: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 32px;
+}
