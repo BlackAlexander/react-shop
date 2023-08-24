@@ -31,7 +31,7 @@
     height: 50px;
     background-color: rgba(255, 255, 255, 0.85);
     top: 15vh;
-    border-radius: 15px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,55 +92,96 @@
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
     width: 80vw;
-    height: 50vh;
-    top: calc(25vh + 50px);
+    height: 57vh;
+    top: calc(24vh + 50px);
     left: 10vw;
     border-radius: 10px;
     min-width: 650px;
 }
 
 .order-data-address{
-    background-color: green;
+    /*background-color: green;*/
+    font-family: "JMH", serif;
+    font-weight: bold;
     position: absolute;
-    width: 30%;
+    width: 35%;
+    height: 10%;
     left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
 }
 
 .order-data-address-input{
-    background-color: gray;
+    background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
-    width: 30%;
+    width: 35%;
+    height: 20%;
     left: 5%;
-    top: 20%;
+    top: 10%;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    overflow-wrap: break-word;
+    resize: none;
 }
 
 .order-data-payment{
-    background-color: #ff8800;
+    font-family: "JMH", serif;
+    font-weight: bold;
     position: absolute;
-    width: 30%;
+    width: 35%;
+    height: 10%;
     left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
     top: 30%;
 }
 
 .order-data-payment-card, .order-data-payment-cash{
-    background-color: #ff8800;
+    font-family: "Inter", serif;
+    background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
-    width: 15%;
-    left: 5%;
-    top: 35%;
+    width: 10%;
+    height: 7%;
+    left: 10%;
+    top: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    user-select: none;
+    z-index: 999;
+    border: 2px solid transparent;
+}
+
+.order-data-payment-card:hover, .order-data-payment-cash:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .order-data-payment-cash{
-    left: 20%;
+    left: 25%;
+}
+
+.order-payment-selected{
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #363636;
 }
 
 .order-friendly-picture{
     /*background-color: #002f00;*/
     position: absolute;
     width: 30%;
-    height: 60%;
-    left: 5%;
-    top: 40%;
+    height: 55%;
+    left: 10%;
+    top: 45%;
     background-image: url("../images/man-holding-package.png");
     background-size: cover;
     background-position: center;
