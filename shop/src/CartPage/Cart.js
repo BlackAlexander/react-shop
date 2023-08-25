@@ -24,7 +24,11 @@ export default function Cart(){
     }
 
     const handleNavigateToPlace = () => {
-        navigate('/place');
+        if (document.querySelector(".summary-price-value").innerHTML === "$0"){
+            window.alert("Can not place an order for free.")
+        } else {
+            navigate('/place');
+        }
     };
 
     return (

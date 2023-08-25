@@ -2,15 +2,50 @@ import Header from "../DisplayPage/DisplayHeader";
 import CartFooter from "../CartPage/CartFooter";
 import OrderDetails from "./OrderDetails";
 import './Place.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
+import PlaceProduct from "./PlaceProduct";
 
+function processOrder(itemslist){
+    let list = [];
+    if (itemslist === undefined){
+        return [];
+    }
+    for (let i = 0; i < itemslist.length; i++){
+        const currentItem = itemslist[i];
+        list.push(PlaceProduct({
+            itemId: currentItem.id,
+            itemPic: currentItem.thumbnail,
+            itemPrice: currentItem.price,
+            itemQuantity: currentItem.quantity,
+            itemTitle: currentItem.title,
+        }))
+    }
+    return list;
+}
 
 export default function Place() {
-    const [paymentMethod, setPaymentMethod] = useState("NONE");
+    const [paymentMethod, setPaymentMethod] = useState("NONE"),
+        [cartList, setCartList] = useState([]),
+        navigate = useNavigate();
     let shippingAddress;
-    const navigate = useNavigate();
+
+    useEffect( () => {
+        let fetchUrl = "http://127.0.0.1:42069/cart/";
+        const IDToUse = getUserID();
+        fetchUrl += IDToUse;
+        fetch(fetchUrl, {
+            method: 'GET',
+            headers: {
+                'Internship-Auth': getToken(),
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                setCartList(processOrder(data.products));
+            })
+    }, [])
 
     function switchPaymentTo(newState){
         setPaymentMethod(newState);
@@ -70,7 +105,7 @@ export default function Place() {
     return (
         <>
             <Header />
-            <OrderDetails place={() => {placeOrder().then()}} changeTo={switchPaymentTo}/>
+            <OrderDetails place={() => {placeOrder().then()}} changeTo={switchPaymentTo} productsToOrder={cartList}/>
             <CartFooter />
         </>
     )
