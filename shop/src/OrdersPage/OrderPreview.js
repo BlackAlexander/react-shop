@@ -48,8 +48,16 @@ export default function OrderPreview({number, date, status, address, payment, pr
                                 </div>
                             </>
                         ) : (
+                        <>
                             <div className="order-preview-payment">Cash Payment</div>
-                        )}
+                            <div className="order-card-data">
+                                <div className="order-preview-cardemoji">💸</div>
+                                <div className="order-preview-cardnumber">Cash payments are not recommended.</div>
+                                <div className="order-preview-cardexpire"></div>
+                                <div className="order-preview-cardcvv"></div>
+                            </div>
+                        </>
+                    )}
 
                     <div className="order-preview-total">{totalno}</div>
                 </div>
