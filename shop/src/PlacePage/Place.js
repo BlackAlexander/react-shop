@@ -103,7 +103,6 @@ export default function Place() {
             window.alert("Please enter a shipping address.")
         } else {
             const returnedResult = await sendRequests();
-            console.log(returnedResult);
             if (returnedResult === true) {
                 window.alert("Order placed successfully.")
                 navigate('/shop');
