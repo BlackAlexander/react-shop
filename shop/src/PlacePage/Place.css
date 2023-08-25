@@ -38,15 +38,15 @@
     font-family: "Inter", serif;
     font-size: 30px;
     animation: order-now;
-    animation-duration: 1s;
+    animation-duration: 2s;
+    white-space: nowrap;
     overflow: hidden;
 }
 
 @keyframes order-now{
     from{
         width: 10px;
-        height: 10px;
-        background-color: red;
+        height: 50px;
     }
     to {
         width: 500px;

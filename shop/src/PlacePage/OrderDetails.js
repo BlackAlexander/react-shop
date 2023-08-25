@@ -1,4 +1,5 @@
-export default function OrderDetails(){
+export default function OrderDetails({changeTo, place}){
+
     return (
         <>
             <div className="cool-fire-animation"></div>
@@ -8,8 +9,8 @@ export default function OrderDetails(){
                 <div className="order-data-address">Address:</div>
                 <textarea className="order-data-address-input" spellCheck="false"/>
                 <div className="order-data-payment">Payment:</div>
-                <div className="order-data-payment-card">CARD</div>
-                <div className="order-data-payment-cash order-payment-selected">CASH</div>
+                <div className="order-data-payment-card" onClick={()=>{changeTo("CARD")}}>CARD</div>
+                <div className="order-data-payment-cash" onClick={()=>{changeTo("CASH")}}>CASH</div>
                 <div className="order-friendly-picture"></div>
                 <div className="place-order-products">
                     <div className="order-product" id="order-product-1">
@@ -38,7 +39,7 @@ export default function OrderDetails(){
                     </div>
                 </div>
                 <div className="order-data-total">Total: $1234.56</div>
-                <div className="order-button">place order</div>
+                <div className="order-button" onClick={place}>place order</div>
             </div>
         </>
     )
