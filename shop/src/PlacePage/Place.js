@@ -25,9 +25,19 @@ function processOrder(itemslist){
     return list;
 }
 
+function computeOrderTotal(){
+    let finalSum = 0;
+    const items = document.getElementsByClassName("order-product-price");
+    for (let i = 0; i < items.length; i++){
+        finalSum += Number(items[i].innerHTML.slice(1));
+    }
+    return "Total: $" + String(finalSum);
+}
+
 export default function Place() {
     const [paymentMethod, setPaymentMethod] = useState("NONE"),
         [cartList, setCartList] = useState([]),
+        [finalSum, setFinalSum] = useState("$0"),
         navigate = useNavigate();
     let shippingAddress;
 
@@ -44,6 +54,7 @@ export default function Place() {
             .then(response => response.json())
             .then(data => {
                 setCartList(processOrder(data.products));
+                setFinalSum(computeOrderTotal());
             })
     }, [])
 
@@ -105,7 +116,7 @@ export default function Place() {
     return (
         <>
             <Header />
-            <OrderDetails place={() => {placeOrder().then()}} changeTo={switchPaymentTo} productsToOrder={cartList}/>
+            <OrderDetails place={() => {placeOrder().then()}} changeTo={switchPaymentTo} productsToOrder={cartList} totalPrice={finalSum}/>
             <CartFooter />
         </>
     )

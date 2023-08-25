@@ -1,4 +1,4 @@
-export default function OrderDetails({changeTo, place, productsToOrder}){
+export default function OrderDetails({changeTo, place, productsToOrder, totalPrice}){
 
     return (
         <>
@@ -15,7 +15,7 @@ export default function OrderDetails({changeTo, place, productsToOrder}){
                 <div className="place-order-products">
                     {productsToOrder}
                 </div>
-                <div className="order-data-total">Total: $1234.56</div>
+                <div className="order-data-total">{totalPrice}</div>
                 <div className="order-button" onClick={place}>place order</div>
             </div>
         </>
