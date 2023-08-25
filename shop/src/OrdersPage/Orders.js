@@ -17,7 +17,7 @@ function processMiniOrders(rawList, changeOrderTo) {
         const currentItem = rawList[i];
         let orderPrice = 0;
         for (let j = 0; j < currentItem.products.length; j++) {
-            orderPrice += Number(currentItem.products[j].price);
+            orderPrice += Number(currentItem.products[j].price) * Number(currentItem.products[j].quantity);
         }
         list.push(OrderMini({
             index: String(rawList.length - i),
