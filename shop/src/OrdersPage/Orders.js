@@ -1,74 +1,92 @@
+import React, { useEffect, useState } from "react";
 import CartHeader from "../CartPage/CartHeader";
 import CartFooter from "../CartPage/CartFooter";
 import OrderPreview from "../OrdersPage/OrderPreview";
 import OrderDisplay from "../OrdersPage/OrderDisplay";
-import './Orders.css'
-import {useEffect, useState} from "react";
-import {getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
+import './Orders.css';
+import { getToken, getUserID } from "../DisplayPage/DisplayAuxJS";
 import OrderMini from "./OrderMini";
 
-function processMiniOrders(rawList, changeOrderTo){
+function processMiniOrders(rawList, changeOrderTo) {
     /** @namespace currentItem.orderNumber **/
     let list = [];
-    if (rawList === undefined){
+    if (rawList === undefined) {
         return [];
     }
-    for (let i = 0; i < rawList.length; i++){
+    for (let i = 0; i < rawList.length; i++) {
         const currentItem = rawList[i];
         let orderPrice = 0;
-        for (let i = 0; i < currentItem.products.length; i++){
-            orderPrice += Number(currentItem.products[i].price);
+        for (let j = 0; j < currentItem.products.length; j++) {
+            orderPrice += Number(currentItem.products[j].price);
         }
-        console.log(orderPrice);
         list.push(OrderMini({
-            index: String(i + 1),
+            index: String(rawList.length - i),
             number: currentItem.orderNumber,
             status: "to be delivered",
             quantity: currentItem.products.length,
             date: currentItem.date,
-            total: "$"+String(orderPrice),
+            total: "$" + String(orderPrice),
             changeOrderTo: changeOrderTo
-        }))
+        }));
     }
     return list;
 }
 
 export default function Orders() {
-    const [currentOrder, setCurrentOrder] = useState(null),
-        [currentDate, setCurrentDate] = useState(null),
-        [currentStatus, setCurrentStatus] = useState("unknown"),
-        [currentAddress, setCurrentAddress] = useState(null),
-        [currentPayment, setCurrentPayment] = useState(null),
-        [currentTotal, setCurrentTotal] = useState("$0"),
-        [currentProducts, setCurrentProducts] = useState([]),
-        [listOfOrders, setListOfOrders] = useState([]);
+    const [currentOrder, setCurrentOrder] = useState(0);
+    const [currentDate, setCurrentDate] = useState(null);
+    const [currentStatus, setCurrentStatus] = useState("unknown");
+    const [currentAddress, setCurrentAddress] = useState(null);
+    const [currentPayment, setCurrentPayment] = useState(null);
+    const [currentProducts, setCurrentProducts] = useState([]);
+    const [listOfOrders, setListOfOrders] = useState([]);
+    const [rawList, setRawList] = useState([]);
 
-    function changeOrderTo(newOrder){
+    function changeOrderTo(newOrder) {
         setCurrentOrder(newOrder);
     }
 
-    useEffect( () => {
-        let fetchUrl = "http://127.0.0.1:42069/order/";
+    useEffect(() => {
+        const fetchUrl = "http://127.0.0.1:42069/order/";
         const IDToUse = getUserID();
-        fetchUrl += IDToUse;
-        fetch(fetchUrl, {
-            method: 'GET',
-            headers: {
-                'Internship-Auth': getToken(),
-            },
-        })
+        const headers = {
+            'Internship-Auth': getToken(),
+        };
+
+        fetch(fetchUrl + IDToUse, { method: 'GET', headers })
             .then(response => response.json())
             .then(data => {
+                setRawList(data);
                 setListOfOrders(processMiniOrders(data, changeOrderTo));
-            })
-    }, [])
+                setCurrentOrder(data[0].orderNumber);
+            });
+    }, []);
+
+    useEffect(() => {
+        for (let i in rawList) {
+            if (String(rawList[i].orderNumber) === String(currentOrder)) {
+                setCurrentDate(rawList[i].date);
+                setCurrentStatus("to be delivered");
+                setCurrentAddress(rawList[i].address);
+                setCurrentPayment(rawList[i].payment);
+                setCurrentProducts(rawList[i].products);
+            }
+        }
+    }, [rawList, currentOrder]);
 
     return (
         <>
             <CartHeader />
             <OrderDisplay miniOrdersList={listOfOrders} />
-            <OrderPreview />
+            <OrderPreview
+                number={currentOrder}
+                date={currentDate}
+                status={currentStatus}
+                address={currentAddress}
+                payment={currentPayment}
+                products={currentProducts}
+            />
             <CartFooter />
         </>
-    )
+    );
 }

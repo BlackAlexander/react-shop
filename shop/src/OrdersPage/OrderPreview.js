@@ -1,4 +1,5 @@
-export default function OrderPreview(){
+export default function OrderPreview({number, date, status, address, payment, products}){
+    console.log(number);
     return (
         <>
             <div className="order-preview-container">
