@@ -7,12 +7,11 @@ export const productApiSlice = createApi({
     }),
     endpoints: (builder) => ({
         getProduct: builder.query({
-            query: ([id, authKey]) => ({
+            query: (id) => ({
                 url: '/products/' + String(id),
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Internship-Auth': authKey
                 }
             }),
         }),

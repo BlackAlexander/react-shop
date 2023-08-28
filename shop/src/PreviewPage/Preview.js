@@ -1,11 +1,8 @@
 import './Preview.css'
 import CartHeader from "../CartPage/CartHeader.js";
 import {useEffect, useState} from "react";
-import {useGetProductQuery} from "../redux/apis.js";
-import {getToken} from "../DisplayPage/DisplayAuxJS.js";
 import {useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {selectRatings} from "../redux/slices/ratings";
+import {useGetProductQuery} from "../redux/apis";
 
 function setStars(starrating){
     for (let i = 1; i <= 5; i++){
@@ -35,43 +32,61 @@ function RatingPreview({rpId, rpTitle, rpDescription, rpRating}){
     </div>
 }
 
+async function getRatings(theId) {
+    let fetchUrl = "http://127.0.0.1:42069/review/";
+    fetchUrl += theId;
+
+    try {
+        const response = await fetch(fetchUrl, {
+            method: 'GET',
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return [];
+    }
+}
+
 export default function Preview(){
     /** @namespace product.images **/
+    /** @namespace product.rating **/
     let location = useLocation();
-    const id = location.pathname.slice(6);
     const [starrating, setStarrating] = useState(0);
 
-    const listOfRatings = useSelector(selectRatings);
-    let theseRatings = [];
-    for (let i = 0; i < listOfRatings.length; i++){
-        const thisId = listOfRatings[i].id;
-        if (thisId === id){
-            theseRatings.push(listOfRatings[i]);
+    const [ratingsToUse, setRatingsToUse] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const id = location.pathname.slice(6);
+            const listOfRatings = await getRatings(id);
+            setRatingsToUse(listOfRatings);
+            console.log(listOfRatings);
         }
-    }
+        fetchData().then();
+    }, []); // Fetch data once when the component mounts
+
     let ratings = [];
     let average = 0;
-    for (let i = 0; i < theseRatings.length; i++){
-        let therating = theseRatings[i];
+    for (let i = 0; i < ratingsToUse.length; i++){
+        let therating = ratingsToUse[i];
         average += Number(therating.rating);
         ratings.push(RatingPreview({
             rpId: String(i),
-            rpDescription: therating.description,
+            rpDescription: therating.comment,
             rpRating: therating.rating,
             rpTitle: therating.title
         }))
     }
-    if (theseRatings.length > 0){
-        average = Math.round((average/(theseRatings.length)) * 100) / 100;
+    if (ratingsToUse.length > 0){
+        average = Math.round((average/(ratingsToUse.length)) * 100) / 100;
     } else {
         average = "No."
     }
 
     const [currentItem, setCurrentItem] = useState(undefined);
     const [currentImage, setCurrentImage] = useState("https://picsum.photos/200/300");
-
-    const token = getToken();
-    const { data: product } = useGetProductQuery([id, token]);
+    const id = location.pathname.slice(6);
+    const { data: product } = useGetProductQuery(id);
 
     useEffect(() => {
         if (product) {
