@@ -1,6 +1,5 @@
 import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectRatings, setRatings} from "../redux/slices/ratings";
+import {getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
 
 function generateHover(howMany){
     for (let i = 0; i < 36; i++){
@@ -64,16 +63,35 @@ export default function Review({idToReview, showreview, titleToReview}){
     useEffect(()=>{
         generate36();
     })
-    const dispatch = useDispatch();
-    const listOfRatings = useSelector(selectRatings);
 
-    const updateRatings = (newReview) => {
-        let newList = structuredClone(listOfRatings);
-        newList.push(newReview);
-        dispatch(setRatings(newList));
+    async function updateRatings (newReview) {
+        console.log(newReview);
+        let url = 'http://127.0.0.1:42069/review/create/';
+        url += String(newReview.id);
+        const IDToUse = getUserID();
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Internship-Auth': getToken(),
+            },
+            body: JSON.stringify({
+                'userId': IDToUse,
+                'rating': newReview.rating,
+                'comment': newReview.description,
+                'title': newReview.title
+            })
+        }).then(response => {
+            if (response.status === 200) {
+                window.alert("Review added.");
+            } else {
+                window.alert("Review not added.");
+            }
+            return response.json();
+        })
     }
 
-    function sendData(){
+    async function sendData() {
         const reviewTitle = document.querySelector(".review-box-title-input").value;
         const reviewDescription = document.querySelector(".review-box-description-input").value;
         const reviewRating = document.querySelector(".review-rating-piece").innerHTML.slice(0, -1);
@@ -83,7 +101,7 @@ export default function Review({idToReview, showreview, titleToReview}){
             description: reviewDescription,
             rating: reviewRating
         }
-        updateRatings(newReview);
+        await updateRatings(newReview).then();
     }
 
     return <div className="review-page">
@@ -103,7 +121,7 @@ export default function Review({idToReview, showreview, titleToReview}){
                 <div className="review-box-rating-title">rating</div>
                 <div className="review-box-rating-input"></div>
             </div>
-            <div className="review-publish" onClick={()=>{sendData();}}>PUSH</div>
+            <div className="review-publish" onClick={()=>{sendData().then();}}>PUSH</div>
         </div>
     </div>
 }

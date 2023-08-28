@@ -35,8 +35,8 @@ export default function Login() {
                 <div className="account-value">John Doe</div>
                 <div className="account-title">email</div>
                 <div className="account-value">{mail}</div>
-                <div className="account-title">phone</div>
-                <div className="account-value">0723 456 789</div>
+                <div className="account-title">password</div>
+                <div className="account-value">hidden</div>
                 <div className="account-title">address</div>
                 <div className="account-value">Calea Turzii</div>
             </div>
