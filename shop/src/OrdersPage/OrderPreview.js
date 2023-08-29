@@ -43,11 +43,13 @@ export default function OrderPreview({number, date, status, address, payment, pr
 
     const [listOfProducts, setListOfProducts] = useState([]);
     const [returnedProducts, setReturnedProducts] = useState([]);
+    const [refetch, setRefetch] = useState(0);
 
     async function returnProduct(productId, orderID) {
         let reason = prompt("Reason for your return:");
         if (reason !== null && reason.length !== 0) {
             await sendReturn(productId, orderID, reason);
+            setRefetch(refetch + 1);
         }
     }
 
@@ -55,22 +57,6 @@ export default function OrderPreview({number, date, status, address, payment, pr
     if (status === "delivered"){
         isDelivered = true;
     }
-
-    // for (let i in products){
-    //     const currentItem = products[i];
-    //     listOfProducts.push(OrderProduct({
-    //         itemId: currentItem.id,
-    //         itemPic: currentItem.thumbnail,
-    //         itemPrice: currentItem.price,
-    //         itemQuantity: currentItem.quantity,
-    //         itemTitle: currentItem.title,
-    //         orderId: number,
-    //         forkey: i,
-    //         isDelivered: isDelivered,
-    //         listOfReturned: returnedProducts,
-    //         returnProduct: returnProduct
-    //     }))
-    // }
 
     useEffect( () => {
         if (number !== 0) {
@@ -86,7 +72,7 @@ export default function OrderPreview({number, date, status, address, payment, pr
                     //console.log(data);
                 })
         }
-    }, [number]);
+    }, [number, refetch]);
 
     useEffect(() => {
         const updatedProducts = products.map((currentItem, i) => {
@@ -105,7 +91,7 @@ export default function OrderPreview({number, date, status, address, payment, pr
         });
 
         setListOfProducts(updatedProducts);
-    }, [products, number, isDelivered, returnedProducts]);
+    }, [products, number, isDelivered, returnedProducts, refetch]);
 
     return (
         <>
