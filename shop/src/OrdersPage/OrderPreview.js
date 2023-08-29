@@ -41,7 +41,7 @@ export default function OrderPreview({number, date, status, address, payment, pr
     }
     const totalno = "Total: $" + String(priceSum);
 
-    // const [listOfProducts, setListOfProducts] = useState([]);
+    const [listOfProducts, setListOfProducts] = useState([]);
     const [returnedProducts, setReturnedProducts] = useState([]);
 
     async function returnProduct(productId, orderID) {
@@ -56,35 +56,56 @@ export default function OrderPreview({number, date, status, address, payment, pr
         isDelivered = true;
     }
 
-    let listOfProducts = [];
-    for (let i in products){
-        const currentItem = products[i];
-        listOfProducts.push(OrderProduct({
-            itemId: currentItem.id,
-            itemPic: currentItem.thumbnail,
-            itemPrice: currentItem.price,
-            itemQuantity: currentItem.quantity,
-            itemTitle: currentItem.title,
-            orderId: number,
-            forkey: i,
-            isDelivered: isDelivered,
-            listOfReturned: returnedProducts,
-            returnProduct: returnProduct
-        }))
-    }
+    // for (let i in products){
+    //     const currentItem = products[i];
+    //     listOfProducts.push(OrderProduct({
+    //         itemId: currentItem.id,
+    //         itemPic: currentItem.thumbnail,
+    //         itemPrice: currentItem.price,
+    //         itemQuantity: currentItem.quantity,
+    //         itemTitle: currentItem.title,
+    //         orderId: number,
+    //         forkey: i,
+    //         isDelivered: isDelivered,
+    //         listOfReturned: returnedProducts,
+    //         returnProduct: returnProduct
+    //     }))
+    // }
+
     useEffect( () => {
-        fetch(`http://127.0.0.1:42069/return/order/${number}`, {
-            method: 'GET',
-            headers: {
-                'Internship-Auth': getToken(),
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                setReturnedProducts(data);
-                //console.log(data);
+        if (number !== 0) {
+            fetch(`http://127.0.0.1:42069/return/order/${number}`, {
+                method: 'GET',
+                headers: {
+                    'Internship-Auth': getToken(),
+                },
             })
-    }, [number])
+                .then(response => response.json())
+                .then(data => {
+                    setReturnedProducts(data);
+                    //console.log(data);
+                })
+        }
+    }, [number]);
+
+    useEffect(() => {
+        const updatedProducts = products.map((currentItem, i) => {
+            return OrderProduct({
+                itemId: currentItem.id,
+                itemPic: currentItem.thumbnail,
+                itemPrice: currentItem.price,
+                itemQuantity: currentItem.quantity,
+                itemTitle: currentItem.title,
+                orderId: number,
+                forkey: i,
+                isDelivered: isDelivered,
+                listOfReturned: returnedProducts,
+                returnProduct: returnProduct
+            });
+        });
+
+        setListOfProducts(updatedProducts);
+    }, [products, number, isDelivered, returnedProducts]);
 
     return (
         <>
