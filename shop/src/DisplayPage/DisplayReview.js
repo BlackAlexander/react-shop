@@ -65,7 +65,6 @@ export default function Review({idToReview, showreview, titleToReview}){
     })
 
     async function updateRatings (newReview) {
-        console.log(newReview);
         let url = 'http://127.0.0.1:42069/review/create/';
         url += String(newReview.id);
         const IDToUse = getUserID();

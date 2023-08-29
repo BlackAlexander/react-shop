@@ -9,6 +9,8 @@ export default function OrderProduct({itemId, itemPic, itemTitle, itemQuantity, 
         <div className="order-product-title">{itemTitle}</div>
         <div className="order-product-price">{newPrice}</div>
         <div className="order-product-quantity">{newQuantity}</div>
-        {isDelivered && <div className="order-product-return" onClick={()=>{returnProduct(itemId, orderId)}}>↩️</div>}
+        {isDelivered && <div className="order-product-return" onClick={async () => {
+            await returnProduct(itemId, orderId)
+        }}>↩️</div>}
     </div>
 }

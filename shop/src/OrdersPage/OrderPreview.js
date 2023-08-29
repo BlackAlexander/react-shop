@@ -1,4 +1,33 @@
 import OrderProduct from "./OrderProduct";
+import {getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
+
+async function sendReturn(productId, orderID, reason) {
+    const IDToUse = getUserID();
+    try {
+        await fetch(`http://127.0.0.1:42069/return/perform`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Internship-Auth': getToken(),
+            },
+            body: JSON.stringify({
+                "userId": IDToUse,
+                "productId": productId,
+                "orderId": orderID,
+                "reason": reason
+            })
+        }).then(response => {
+            if (response.status === 201) {
+                window.alert("Product sent to return.");
+            } else {
+                window.alert("Could not return.");
+            }
+            return response.json();
+        })
+    } catch (error) {
+        console.error("Could not return: ", error);
+    }
+}
 
 export default function OrderPreview({number, date, status, address, payment, products}){
     let orderno = "ORDER no. ";
@@ -11,15 +40,14 @@ export default function OrderPreview({number, date, status, address, payment, pr
     }
     const totalno = "Total: $" + String(priceSum);
 
-    function returnProduct(productId, orderID){
+    async function returnProduct(productId, orderID) {
         let reason = prompt("Reason for your return:");
-        if (reason !== null && reason.length !== 0){
-            console.log(productId, orderID, reason)
+        if (reason !== null && reason.length !== 0) {
+            await sendReturn(productId, orderID, reason);
         }
     }
 
     let isDelivered = false;
-    console.log(status);
     if (status === "delivered"){
         isDelivered = true;
     }

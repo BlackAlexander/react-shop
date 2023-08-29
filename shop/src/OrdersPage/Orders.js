@@ -26,7 +26,6 @@ function processMiniOrders(rawList, changeOrderTo) {
             todayDate = new Date(),
             daysDifference = Math.ceil((todayDate - orderDate)/(1000 * 3600 * 24));
         let orderStatus;
-        console.log(daysDifference);
         if (daysDifference >= 4){
             orderStatus = "delivered";
         } else {
@@ -84,7 +83,6 @@ export default function Orders() {
                     orderDate = new Date(y, m-1, d),
                     todayDate = new Date(),
                     daysDifference = Math.ceil((todayDate - orderDate)/(1000 * 3600 * 24));
-                console.log(daysDifference);
                 if (daysDifference >= 4){
                     setCurrentStatus("delivered");
                 } else {
