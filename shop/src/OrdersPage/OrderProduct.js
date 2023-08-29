@@ -11,7 +11,9 @@ export default function OrderProduct({itemId, itemPic, itemTitle, itemQuantity, 
         }
     }
     return <div className="order-product" id={newKey} key={newKey}>
-        <img src={itemPic} alt="order product" className="order-product-pic"/>
+        <img src={itemPic} alt="order product" style={{
+            filter: isReturned ? 'grayscale(100%)' : 'grayscale(0%)'
+        }} className="order-product-pic"/>
         <div className="order-product-title" style={{
             textDecoration: isReturned ? 'line-through' : 'none'
         }}>{itemTitle}</div>
