@@ -19,10 +19,23 @@ function processMiniOrders(rawList, changeOrderTo) {
         for (let j = 0; j < currentItem.products.length; j++) {
             orderPrice += Number(currentItem.products[j].price) * Number(currentItem.products[j].quantity);
         }
+        const d = currentItem.date.slice(0,2),
+            m = currentItem.date.slice(3,5),
+            y = currentItem.date.slice(6,10),
+            orderDate = new Date(y, m-1, d),
+            todayDate = new Date(),
+            daysDifference = Math.ceil((todayDate - orderDate)/(1000 * 3600 * 24));
+        let orderStatus;
+        console.log(daysDifference);
+        if (daysDifference >= 4){
+            orderStatus = "delivered";
+        } else {
+            orderStatus = "in delivery";
+        }
         list.push(OrderMini({
             index: String(rawList.length - i),
             number: currentItem.orderNumber,
-            status: "delivered",
+            status: orderStatus,
             quantity: currentItem.products.length,
             date: currentItem.date,
             total: "$" + String(orderPrice),
@@ -65,8 +78,19 @@ export default function Orders() {
     useEffect(() => {
         for (let i in rawList) {
             if (String(rawList[i].orderNumber) === String(currentOrder)) {
+                const d = rawList[i].date.slice(0,2),
+                    m = rawList[i].date.slice(3,5),
+                    y = rawList[i].date.slice(6,10),
+                    orderDate = new Date(y, m-1, d),
+                    todayDate = new Date(),
+                    daysDifference = Math.ceil((todayDate - orderDate)/(1000 * 3600 * 24));
+                console.log(daysDifference);
+                if (daysDifference >= 4){
+                    setCurrentStatus("delivered");
+                } else {
+                    setCurrentStatus("in delivery");
+                }
                 setCurrentDate(rawList[i].date);
-                setCurrentStatus("delivered");
                 setCurrentAddress(rawList[i].address);
                 setCurrentPayment(rawList[i].payment);
                 setCurrentProducts(rawList[i].products);
