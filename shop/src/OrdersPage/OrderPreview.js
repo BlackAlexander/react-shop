@@ -1,5 +1,6 @@
 import OrderProduct from "./OrderProduct";
 import {getToken, getUserID} from "../DisplayPage/DisplayAuxJS";
+import {useEffect, useState} from "react";
 
 async function sendReturn(productId, orderID, reason) {
     const IDToUse = getUserID();
@@ -40,6 +41,9 @@ export default function OrderPreview({number, date, status, address, payment, pr
     }
     const totalno = "Total: $" + String(priceSum);
 
+    // const [listOfProducts, setListOfProducts] = useState([]);
+    const [returnedProducts, setReturnedProducts] = useState([]);
+
     async function returnProduct(productId, orderID) {
         let reason = prompt("Reason for your return:");
         if (reason !== null && reason.length !== 0) {
@@ -64,9 +68,23 @@ export default function OrderPreview({number, date, status, address, payment, pr
             orderId: number,
             forkey: i,
             isDelivered: isDelivered,
+            listOfReturned: returnedProducts,
             returnProduct: returnProduct
         }))
     }
+    useEffect( () => {
+        fetch(`http://127.0.0.1:42069/return/order/${number}`, {
+            method: 'GET',
+            headers: {
+                'Internship-Auth': getToken(),
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                setReturnedProducts(data);
+                //console.log(data);
+            })
+    }, [number])
 
     return (
         <>
