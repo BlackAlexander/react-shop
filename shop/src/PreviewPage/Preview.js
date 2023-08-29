@@ -60,7 +60,6 @@ export default function Preview(){
             const id = location.pathname.slice(6);
             const listOfRatings = await getRatings(id);
             setRatingsToUse(listOfRatings);
-            console.log(listOfRatings);
         }
         fetchData().then();
     }, []); // Fetch data once when the component mounts

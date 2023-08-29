@@ -11,6 +11,13 @@ export default function OrderPreview({number, date, status, address, payment, pr
     }
     const totalno = "Total: $" + String(priceSum);
 
+    function returnProduct(productId, orderID){
+        let reason = prompt("Reason for your return:");
+        if (reason !== null && reason.length !== 0){
+            console.log(productId, orderID, reason)
+        }
+    }
+
     let listOfProducts = [];
     for (let i in products){
         const currentItem = products[i];
@@ -20,7 +27,9 @@ export default function OrderPreview({number, date, status, address, payment, pr
             itemPrice: currentItem.price,
             itemQuantity: currentItem.quantity,
             itemTitle: currentItem.title,
-            forkey: i
+            orderId: number,
+            forkey: i,
+            returnProduct: returnProduct
         }))
     }
 

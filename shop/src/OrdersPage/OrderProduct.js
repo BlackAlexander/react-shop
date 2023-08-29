@@ -1,4 +1,6 @@
-export default function OrderProduct({itemPic, itemTitle, itemQuantity, itemPrice, forkey}){
+
+
+export default function OrderProduct({itemId, itemPic, itemTitle, itemQuantity, itemPrice, forkey, orderId, returnProduct}){
     const newPrice = "$" + String(itemPrice);
     const newQuantity = "x" + String(itemQuantity);
     const newKey = "order-product-" + String(forkey);
@@ -7,5 +9,6 @@ export default function OrderProduct({itemPic, itemTitle, itemQuantity, itemPric
         <div className="order-product-title">{itemTitle}</div>
         <div className="order-product-price">{newPrice}</div>
         <div className="order-product-quantity">{newQuantity}</div>
+        <div className="order-product-return" onClick={()=>{returnProduct(itemId, orderId)}}>↩️</div>
     </div>
 }
