@@ -28,6 +28,8 @@ function processMiniOrders(rawList, changeOrderTo) {
         let orderStatus;
         if (daysDifference >= 4){
             orderStatus = "delivered";
+        } else if (daysDifference >= 14){
+            orderStatus = "delivered old";
         } else {
             orderStatus = "in delivery";
         }
@@ -85,6 +87,8 @@ export default function Orders() {
                     daysDifference = Math.ceil((todayDate - orderDate)/(1000 * 3600 * 24));
                 if (daysDifference >= 4){
                     setCurrentStatus("delivered");
+                } else if (daysDifference >= 14){
+                    setCurrentStatus("delivered old");
                 } else {
                     setCurrentStatus("in delivery");
                 }
