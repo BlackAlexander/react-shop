@@ -22,7 +22,7 @@ function processMiniOrders(rawList, changeOrderTo) {
         list.push(OrderMini({
             index: String(rawList.length - i),
             number: currentItem.orderNumber,
-            status: "to be delivered",
+            status: "delivered",
             quantity: currentItem.products.length,
             date: currentItem.date,
             total: "$" + String(orderPrice),
@@ -66,7 +66,7 @@ export default function Orders() {
         for (let i in rawList) {
             if (String(rawList[i].orderNumber) === String(currentOrder)) {
                 setCurrentDate(rawList[i].date);
-                setCurrentStatus("to be delivered");
+                setCurrentStatus("delivered");
                 setCurrentAddress(rawList[i].address);
                 setCurrentPayment(rawList[i].payment);
                 setCurrentProducts(rawList[i].products);

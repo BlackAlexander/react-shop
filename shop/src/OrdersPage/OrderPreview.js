@@ -18,6 +18,12 @@ export default function OrderPreview({number, date, status, address, payment, pr
         }
     }
 
+    let isDelivered = false;
+    console.log(status);
+    if (status === "delivered"){
+        isDelivered = true;
+    }
+
     let listOfProducts = [];
     for (let i in products){
         const currentItem = products[i];
@@ -29,6 +35,7 @@ export default function OrderPreview({number, date, status, address, payment, pr
             itemTitle: currentItem.title,
             orderId: number,
             forkey: i,
+            isDelivered: isDelivered,
             returnProduct: returnProduct
         }))
     }
