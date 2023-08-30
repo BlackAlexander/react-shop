@@ -66,10 +66,39 @@
     font-size: min(3rem, 10vh);
     top: 12vh;
     left: 7%;
+    letter-spacing: 0.6rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
 
+.orders-returns{
+    width: 250px;
+    height: 4vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 3px;
+    position: absolute;
+    top: 17vh;
+    right: 8vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 0 0 5px rgb(255, 255, 255)
+}
+
+.orders-returns:after{
+    content:"<returns>";
+}
+
+.orders-returns:hover:after{
+    content:"< returns >";
+}
+
+.orders-returns:hover{
+    cursor: pointer;
+    background-color: rgba(197, 197, 197, 0.85);
 }
 
 .order-item{

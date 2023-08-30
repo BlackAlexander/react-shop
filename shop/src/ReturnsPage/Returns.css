@@ -1,0 +1,16 @@
+.returns-title{
+    margin-top: 0;
+    margin-bottom: 0;
+    position: fixed;
+    color: white;
+    font-weight: normal;
+    height: 13vh;
+    white-space: nowrap;
+    font-size: min(3rem, 10vh);
+    letter-spacing: 0.6rem;
+    top: 12vh;
+    left: 7%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

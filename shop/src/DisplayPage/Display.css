@@ -810,5 +810,5 @@ body {
     width: 90%;
     border-radius: 20px;
     box-shadow: 0 1px 5px rgb(0, 0, 0);
-    z-index: 999;
+    z-index: -1;
 }
