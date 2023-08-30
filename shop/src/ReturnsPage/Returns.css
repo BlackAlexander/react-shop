@@ -9,8 +9,22 @@
     font-size: min(3rem, 10vh);
     letter-spacing: 0.6rem;
     top: 12vh;
-    left: 7%;
+    left: 20vw;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.returns-container{
+    font-family: "Inter", serif;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.7);
+    left: 20%;
+    top: 25%;
+    height: 60%;
+    width: 60%;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgb(255, 255, 255);
+    min-width: 600px;
+    overflow: hidden;
 }

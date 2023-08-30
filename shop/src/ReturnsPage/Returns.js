@@ -7,6 +7,9 @@ export default function Returns(){
     return (<>
         <CartHeader />
         <h2 className="returns-title">YOUR RETURNS</h2>
+        <div className="returns-container">
+
+        </div>
         <CartFooter />
     </>)
 }
